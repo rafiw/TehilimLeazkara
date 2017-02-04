@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="listOptions">
+        <item>אשכנז</item>
+        <item >ספרד</item>
+        <item >עדות המזרח</item>
+        <item >תימן</item>
+    </string-array>
+    <string-array name="listValues">
+        <item>0</item>
+        <item >1</item>
+        <item >2</item>
+        <item >3</item>
+    </string-array>
+    <string-array name="fontlistOptions">
+        <item >רגיל</item>
+        <item >כתר ארם צובה</item>
+        <item >SBL</item>
+        <item >שמוליק</item>
+        <item >שופר</item>
+        <item >עזרא-סיל</item>
+        <item >עזרא-סיל2</item>
+        <item >טעמי אשכנז</item>
+        <item >טעמי דוד</item>
+    </string-array>
+    <string-array name="fontlistValues">
+        <item >0</item>
+        <item >KeterAramTsova.ttf</item>
+        <item >SBL_Hbrw.ttf</item>
+        <item >ShmulikCLM.ttf</item>
+        <item >ShofarRegular.ttf</item>
+        <item >SILEOT.ttf</item>
+        <item >SILEOTSR.ttf</item>
+        <item >TaameyAshkenaz.ttf</item>
+        <item >TaameyDavidCLM.ttf</item>
+    </string-array>
+</resources>

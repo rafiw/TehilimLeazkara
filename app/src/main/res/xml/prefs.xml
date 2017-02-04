@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+<PreferenceCategory
+   android:title="הגדרות" >
+  <ListPreference
+     android:entries="@array/listOptions"
+     android:entryValues="@array/listValues"
+     android:key="listpref"
+     android:title="בחר את הנוסח" 
+     android:dialogTitle="אשכנז/ספרד/תימן"/>
+  <ListPreference
+     android:entries="@array/fontlistOptions"
+     android:entryValues="@array/fontlistValues"
+     android:key="fontlistpref"
+     android:title="בחר גופן"
+     android:dialogTitle="רשימת גופנים"/>
+  <EditTextPreference 
+      android:key="fontSize" 
+      android:title="גודל פונט"
+      android:dialogTitle="כתבו מספר שלם בלבד"
+      android:defaultValue="26"
+      />
+  <CheckBoxPreference
+      android:summaryOn="ניקוד מוצג"
+      android:summaryOff="ניקוד לא מוצג"
+      android:key="isFontEnabled"
+      android:title="להציג ניקוד?"
+      android:summary="האם להציג ניקוד בטקסט"
+      android:defaultValue="true"
+      />
+  <CheckBoxPreference 
+      android:summaryOff="טקסט לבן על רקע שחור"
+      android:summaryOn="טקסט שחור על רקע לבן"
+      android:key="blackText"
+      android:title="צבע טקסט ורקע"
+      android:summary="קובע את צבע הטקסט והרקע לבן ושחור"
+      android:defaultValue="true"
+      />
+  <CheckBoxPreference
+      android:summaryOn="מסך מלא"
+      android:summaryOff="מסך לא מלא"
+      android:key="fullScreenOn"
+      android:title="מסך מלא"
+      android:defaultValue="true"
+      />
+    <CheckBoxPreference
+      android:summaryOn="נסה לישר לימין"
+      android:summaryOff="ישר לימין"
+      android:key="right_to_left"
+      android:title="ישור טקסט"
+      android:defaultValue="true"
+      />
+</PreferenceCategory>
+</PreferenceScreen>

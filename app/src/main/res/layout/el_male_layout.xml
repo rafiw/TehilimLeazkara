@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" android:orientation="vertical">
+
+    <EditText
+            android:id="@+id/deceseNameElMale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
+            android:hint="@string/deceseName"/>
+  <ToggleButton
+            android:id="@+id/sonGirltoggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:checked="true"
+            android:textOff="@string/girl"
+            android:textOn="@string/son" />
+
+    <EditText
+        android:id="@+id/parentNameElMale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="right|center_vertical"
+        android:hint="@string/sonOf"/>
+
+    <Button
+            android:id="@+id/okButtonElMale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ok" />
+
+    <Button
+            android:id="@+id/genericButtonElMale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/showGeneric" />
+</LinearLayout>
