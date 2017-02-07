@@ -4,7 +4,9 @@
     <group android:id="@+id/mainMenu" android:visible="true" android:enabled="true">
         <item android:id="@+id/zoomIn" android:title="הגדל פונט" 
         ></item>
-        <item android:id="@+id/zoomOut"  android:title="הקטן פונט" 
+        <item android:id="@+id/zoomOut"  android:title="הקטן פונט"
+        ></item>
+        <item android:id="@+id/zoomReset"  android:title="ברירת מחדל"
         ></item>
     </group>
     

@@ -2,7 +2,7 @@
 <menu 
 	xmlns:android="http://schemas.android.com/apk/res/android">
         <group android:id="@+id/mainGroup" android:visible="true" android:menuCategory="system" android:enabled="true">
-            <item android:id="@+id/_about" android:title="אודות" ></item>
             <item android:id="@+id/_settings" android:title="הגדרות" ></item>
+            <item android:id="@+id/_about" android:title="אודות" ></item>
         </group>
     </menu>

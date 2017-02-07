@@ -1,46 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" android:orientation="vertical">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollViewThilim"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="left"
+    >
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/entranceButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="20dip"
-        android:text="@string/EnternaceButtonText" />
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:height="30dp"
+            android:id="@+id/configed_nusach" />
 
-    <TextView android:text="@string/inputName" android:id="@+id/textView1" android:textAppearance="?android:attr/textAppearanceMedium" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="right"></TextView>
-    <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:layout_width="match_parent">
-        <EditText android:layout_width="0dip" android:id="@+id/name" android:layout_weight="1" 
-        android:layout_height="wrap_content" android:layout_gravity="left" android:gravity="left"
-        android:hint="@string/writeDethName">
-        </EditText>
+        <Button
+            android:id="@+id/entranceButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dip"
+            android:text="@string/EnternaceButtonText" />
+
+        <LinearLayout
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:id="@+id/linearLayout1"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+
+            <EditText
+                android:layout_marginLeft="5dp"
+                android:id="@+id/par_name"
+                android:hint="@string/writeParName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+            </EditText>
+
+            <ToggleButton
+                android:text="ToggleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/son_daughter"
+                android:textOn="@string/son"
+                android:textOff="@string/girl"/>
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:hint="@string/writeDethName">
+            </EditText>
+
+            </LinearLayout>
+        <Button android:id="@+id/okBbutton"
+            android:text="@string/view_tel"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"></Button>
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp">
+        <TextView
+            android:text="@string/ashkava_g_b"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            />
+
+        <Button
+            android:text="@string/ashkava_label_w"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/ashkava_button" />
+
+        </LinearLayout>
+        <LinearLayout android:id="@+id/linearLayout44"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/elMaleRachamim"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/elMaleLabel" >
+        </Button>
+
+        <Button
+            android:id="@+id/tfilaLeiluy"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:text="@string/tfilaLeiliy_t" />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/linearLayout4"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp">
+        <Button
+            android:id="@+id/kadishYatomButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/kadishYatomLabel" />
+
+        <Button
+            android:id="@+id/kadishDerabananButton"
+            android:layout_width="0dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/KadishDerabanaLabel" />
+        </LinearLayout>
     </LinearLayout>
-    <Button android:id="@+id/okBbutton" android:text="@string/ok" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_gravity="center_horizontal"></Button>
-
-    <Button
-        android:id="@+id/elMaleRachamim"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dip"
-        android:text="@string/elMaleLabel" >
-</Button>
-
-    <Button
-        android:id="@+id/kadishYatomButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dip"
-        android:text="@string/kadishYatomLabel" />
-
-    <Button
-        android:id="@+id/kadishDerabananButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dip"
-        android:text="@string/KadishDerabanaLabel" />
-    
-</LinearLayout>
+</ScrollView>
