@@ -110,6 +110,7 @@ public class Viewthilim extends Activity implements Constants {
     }
     @Override
     protected void onRestart(){
+        super.onRestart();
         SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.apply();

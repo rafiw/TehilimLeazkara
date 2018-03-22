@@ -75,14 +75,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="20dp">
-        <TextView
-            android:text="@string/ashkava_g_b"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView"
-            />
 
-        <Button
+            <Button
             android:text="@string/ashkava_label_w"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -33,7 +33,7 @@
             android:title="להציג ניקוד?" />
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="blackText"
+            android:key="@string/pref_black_text"
             android:summary="קובע את צבע הטקסט והרקע לבן ושחור"
             android:summaryOff="טקסט לבן על רקע שחור"
             android:summaryOn="טקסט שחור על רקע לבן"

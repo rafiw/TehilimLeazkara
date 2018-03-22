@@ -62,7 +62,7 @@ public class TehilimLeazkaraActivity extends Activity implements Constants {
         String fontSize = prefs.getString(getResources().getString(R.string.pref_font_size), DEFAULT_FONT_SIZE);
         try {
             if (Integer.parseInt(fontSize) == 0
-                    || Integer.parseInt(fontSize) > 50
+                    || Integer.parseInt(fontSize) > 80
                     || Integer.parseInt(fontSize) < 1) {
                 fontSize = DEFAULT_FONT_SIZE;
                 Toast.makeText(this, R.string.error_small,
@@ -107,7 +107,7 @@ public class TehilimLeazkaraActivity extends Activity implements Constants {
                 + getResources().getString(R.string.tehilimYz) + "\n\n");
         sb.append(getResources().getString(R.string.perek) + " " + a_b[15] + "\"" + a_b[1] + "\n"
                 + getResources().getString(R.string.tehilimAb) + "\n\n");
-        sb.append(getResources().getString(R.string.perek) + " " + a_b[22] + "\"" + a_b[1] + "\n"
+        sb.append(getResources().getString(R.string.perek) + " " + a_b[22] + "\"" + a_b[0] + "\n"
                 + getResources().getString(R.string.tehilimTza) + "\n\n");
         sb.append(getResources().getString(R.string.perek) + " " + a_b[18] + "\"" + a_b[3] + "\n"
                 + getResources().getString(R.string.tehilimKd) + "\n\n");
@@ -159,16 +159,6 @@ public class TehilimLeazkaraActivity extends Activity implements Constants {
             }
         });
 
-        tg.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked)
-                    ashkava.setText(getResources().getString(R.string.ashkava_label_m));
-                else
-                    ashkava.setText(getResources().getString(R.string.ashkava_label_w));
-            }
-        });
-
         elMale.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -201,10 +191,29 @@ public class TehilimLeazkaraActivity extends Activity implements Constants {
         ashkava.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tg.isChecked())
-                    sendTextToView(getResources().getString(R.string.ashkava_m));
-                else
-                    sendTextToView(getResources().getString(R.string.ashkava_w));
+            String str;
+            if (tg.isChecked()) { // male
+                if (name.getText().length() > 0) {
+                    str = getResources().getString(R.string.ashkava_m1) + " " +name.getText() +" בן " +
+                            parName.getText() + getResources().getString(R.string.ashkava_m2);
+                } else {
+                    Toast.makeText(v.getContext(), R.string.error_missing_nams, Toast.LENGTH_LONG).show();
+                    str = getResources().getString(R.string.ashkava_m1) + " " +
+                            getResources().getString(R.string.ashkava_m_anon) + " " +
+                            getResources().getString(R.string.ashkava_m2);
+                }
+            } else { // female
+                if (name.getText().length() > 0) {
+                    str = getResources().getString(R.string.ashkava_w1) + " " + name.getText() +  " בת " +
+                            parName.getText() + " " + getResources().getString(R.string.ashkava_w2);
+                } else {
+                    Toast.makeText(v.getContext(), R.string.error_missing_nams, Toast.LENGTH_LONG).show();
+                    str = getResources().getString(R.string.ashkava_w1) + " " +
+                            getResources().getString(R.string.ashkava_w_anon) +" " +
+                            getResources().getString(R.string.ashkava_w2);
+                }
+            }
+            sendTextToView(str);
             }
         });
 
@@ -243,12 +252,12 @@ public class TehilimLeazkaraActivity extends Activity implements Constants {
                 if (tg.isChecked()) {
                     //son
                     sb.append(getResources().getString(R.string.son) + " ");
-                    sb.append(parName.getText().toString() + " ");
+                    sb.append(" " + parName.getText().toString() + " ");
                     sb.append(getResources().getString(R.string.tfilat_leiluy_m));
                 } else {
                     //girl
                     sb.append(getResources().getString(R.string.girl) + " ");
-                    sb.append(parName.getText().toString() + " ");
+                    sb.append(" " + parName.getText().toString() + " ");
                     sb.append(getResources().getString(R.string.tfilat_leiluy_w));
                 }
                 sendTextToView(sb.toString());
