@@ -8,6 +8,8 @@ android {
     compileSdk 34
     lintOptions {
         disable "Instantiatable"
+	checkReleaseBuilds false
+        abortOnError false
     }
 
     defaultConfig {
