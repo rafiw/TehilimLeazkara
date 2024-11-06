@@ -6,3 +6,4 @@ local.properties
 .gradle
 *.iml
 .DS_Store
+app/app.iml
