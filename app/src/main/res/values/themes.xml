@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme -->
+    <style name="Theme.App" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_variant</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSecondaryVariant">@color/secondary_dark</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+        <!-- Background colors -->
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorError">@color/error</item>
+
+        <!-- Text appearance -->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.YourApp.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.YourApp.Headline2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.YourApp.Body1</item>
+
+        <!-- RTL support for your Hebrew text -->
+        <item name="android:textDirection">rtl</item>
+        <item name="android:layoutDirection">rtl</item>
+    </style>
+
+    <!-- Custom text styles -->
+    <style name="TextAppearance.YourApp.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.YourApp.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.YourApp.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- Custom button styles -->
+    <style name="Widget.YourApp.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:minHeight">56dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+    </style>
+
+    <style name="Widget.YourApp.Button.OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:minHeight">56dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+    </style>
+
+    <style name="SettingsTheme" parent="Theme.Material3.DayNight">
+        <item name="android:background">@color/white</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColorSecondary">@color/black</item>
+        <!-- For the switch colors -->
+        <item name="colorControlActivated">@color/primary</item>
+        <item name="alertDialogTheme">@style/PreferenceDialog</item>
+    </style>
+    <style name="PreferenceDialog" parent="Theme.Material3.DayNight.Dialog.Alert">
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColorSecondary">@color/black</item>
+        <item name="android:windowBackground">@color/white</item>
+        <!-- For the radio buttons -->
+        <item name="colorControlNormal">@color/black</item>
+        <item name="colorControlActivated">@color/primary</item>
+        <!-- For the button text -->
+        <item name="buttonBarButtonStyle">@style/PreferenceDialogButtonStyle</item>
+    </style>
+
+    <style name="PreferenceDialogButtonStyle" parent="Widget.Material3.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/primary</item>
+    </style>
+</resources>

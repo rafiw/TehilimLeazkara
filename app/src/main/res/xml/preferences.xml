@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:layout="@layout/preferences_category"
+        app:title="הגדרות"
+        app:iconSpaceReserved="false">
+
+        <ListPreference
+            app:key="@string/pref_list_key"
+            app:title="בחר את הנוסח"
+            app:dialogTitle="אשכנז/ספרד/תימן"
+            app:entries="@array/nusachlistOptions"
+            app:entryValues="@array/nusachlistValues"
+            app:defaultValue="0"
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            app:key="@string/pref_font_list"
+            app:title="בחר גופן"
+            app:dialogTitle="רשימת גופנים"
+            app:entries="@array/fontlistOptions"
+            app:entryValues="@array/fontlistValues"
+            app:defaultValue="0"
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            app:key="@string/pref_is_font_enabled"
+            app:title="להציג ניקוד?"
+            app:summary="האם להציג ניקוד בטקסט"
+            app:summaryOn="ניקוד מוצג"
+            app:summaryOff="ניקוד לא מוצג"
+            app:defaultValue="true"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            app:key="@string/pref_black_text"
+            app:title="צבע טקסט ורקע"
+            app:summary="קובע את צבע הטקסט והרקע לבן ושחור"
+            app:summaryOn="טקסט שחור על רקע לבן"
+            app:summaryOff="טקסט לבן על רקע שחור"
+            app:defaultValue="true"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+</PreferenceScreen>

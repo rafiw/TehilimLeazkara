@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="listOptions">
+    <string-array name="nusachlistOptions">
         <item>אשכנז</item>
         <item >ספרד</item>
         <item >עדות המזרח</item>
         <item >תימן</item>
     </string-array>
-    <string-array name="listValues">
+    <string-array name="nusachlistValues">
         <item>0</item>
         <item >1</item>
         <item >2</item>
@@ -25,13 +25,13 @@
     </string-array>
     <string-array name="fontlistValues">
         <item >0</item>
-        <item >KeterAramTsova.ttf</item>
-        <item >SBL_Hbrw.ttf</item>
-        <item >ShmulikCLM.ttf</item>
-        <item >ShofarRegular.ttf</item>
-        <item >SILEOT.ttf</item>
-        <item >SILEOTSR.ttf</item>
-        <item >TaameyAshkenaz.ttf</item>
-        <item >TaameyDavidCLM.ttf</item>
+        <item >keter_aram_tsova.ttf</item>
+        <item >sbl_hebrew.ttf</item>
+        <item >shmulik_clm.ttf</item>
+        <item >shofar_regular.ttf</item>
+        <item >sileot.ttf</item>
+        <item >sileotsr.ttf</item>
+        <item >taamey_ashkenaz.ttf</item>
+        <item >taamey_david_clm.ttf</item>
     </string-array>
 </resources>

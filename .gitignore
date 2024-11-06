@@ -1,3 +1,8 @@
 build
 app/build
-
+app/release
+.idea
+local.properties
+.gradle
+*.iml
+.DS_Store

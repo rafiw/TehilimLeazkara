@@ -1,50 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="com.solve.it"
-      android:versionCode="8"
-      android:versionName="0.314159">
-    <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="14" />
-     <uses-permission android:name="android.permission.WAKE_LOCK"/>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <application android:icon="@drawable/icon" android:label="@string/app_name">
-        <activity android:name=".TehilimLeazkaraActivity"
-                  android:label="@string/app_name">
+    <supports-screens
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:roundIcon="@drawable/icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.App"
+		tools:targetApi="33">
+        <activity
+            android:name=".TehilimLeazkaraActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-		
-		<activity android:name=".Viewthilim" android:label="@string/app_name"
-		    android:exported="false">
-            <intent-filter>
-                <action android:name="com.solve.it.THILIM" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+		<activity
+            android:name=".ViewTehilim"
+            android:exported="false"
+        />
+        <activity
+            android:name=".SettingsActivity"
+            android:theme="@style/SettingsTheme"
+            android:parentActivityName=".TehilimLeazkaraActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".TehilimLeazkaraActivity" />
         </activity>
-       
-       <activity android:name=".About" android:theme="@android:style/Theme.Dialog"
-           		    android:exported="false">
-            <intent-filter>
-                <action android:name="com.solve.it.ABOUT" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        
-		<activity android:name="Prefrenc"  android:label="@string/app_name"
-		    android:exported="false">
-		    <intent-filter>
-                <action android:name="com.solve.it.PREFS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-		</activity>
-
-        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
-
     </application>
 </manifest>

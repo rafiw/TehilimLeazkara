@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu 
-	xmlns:android="http://schemas.android.com/apk/res/android">
+<menu  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.solve.it.TehilimLeazkaraActivity">
+    <item
+        android:id="@+id/_settings"
+        android:icon="@drawable/ic_settings"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/settings_title"/>
+    <item
+        android:id="@+id/_about"
+        android:icon="@drawable/ic_info"
+        android:orderInCategory="101"
+        app:showAsAction="never"
+        android:title="@string/about_title"/>
+</menu>
+    <!--
         <group android:id="@+id/mainGroup" android:visible="true" android:menuCategory="system" android:enabled="true">
             <item android:id="@+id/_settings" android:title="הגדרות" ></item>
             <item android:id="@+id/_about" android:title="אודות" ></item>
         </group>
     </menu>
+-->
+

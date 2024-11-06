@@ -1,132 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scrollViewThilim"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="left"
-    >
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:orientation="vertical">
+    android:fitsSystemWindows="true"
+    tools:context=".TehilimLeazkaraActivity">
 
-        <TextView
-            android:text="TextView"
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/configed_nusach"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:height="30dp"
-            android:id="@+id/configed_nusach" />
+            android:layout_marginBottom="30dp"
+            android:textAlignment="center"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            tools:text="Current Nusach" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/entranceButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="20dip"
-            android:text="@string/EnternaceButtonText" />
+            android:layout_marginBottom="24dp"
+            android:contentDescription="@string/EntranceButtonText"
+            android:text="@string/EntranceButtonText" />
 
-        <LinearLayout
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:id="@+id/linearLayout1"
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+            android:layout_marginBottom="16dp"
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true">
 
-            <EditText
-                android:layout_marginLeft="5dp"
-                android:id="@+id/par_name"
-                android:hint="@string/writeParName"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
-            </EditText>
+                android:orientation="horizontal"
+                android:padding="8dp">
 
-            <ToggleButton
-                android:text="ToggleButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/son_daughter"
-                android:textOn="@string/son"
-                android:textOff="@string/girl"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:textColorHint="@color/black"
+                    android:layoutDirection="rtl"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/black">
 
-            <EditText
-                android:id="@+id/name"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/par_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textDirection="rtl"
+                        android:hint="@string/writeParName"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                android:layout_height="wrap_content"
-                android:hint="@string/writeDethName">
-            </EditText>
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical">
 
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/son_daughter"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:minWidth="48dp"
+                        android:text="@string/son"
+                        android:contentDescription="gender"
+                        app:strokeColor="@color/black"
+                        app:strokeWidth="1dp"
+                        android:textColor="@color/black" />
+                </com.google.android.material.button.MaterialButtonToggleGroup>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:textColorHint="@color/black"
+                    android:layoutDirection="rtl"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/black">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:hint="@string/writeDethName"
+                        android:textDirection="rtl"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
-        <Button android:id="@+id/okBbutton"
-            android:text="@string/view_tel"
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/viewTehilim"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center_horizontal"></Button>
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp"
+            android:contentDescription="@string/view_tel"
+            android:text="@string/view_tel" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/ashkava_button"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp"
+            android:contentDescription="@string/ashkava_label_w"
+            android:text="@string/ashkava_label_w" />
+
         <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="20dp">
-
-            <Button
-            android:text="@string/ashkava_label_w"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:id="@+id/ashkava_button" />
-
-        </LinearLayout>
-        <LinearLayout android:id="@+id/linearLayout44"
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_marginTop="20dp">
-
-        <Button
-            android:id="@+id/elMaleRachamim"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="1"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/elMaleLabel" >
-        </Button>
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
 
-        <Button
-            android:id="@+id/tfilaLeiluy"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:text="@string/tfilaLeiliy_t" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/elMaleRachamim"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:contentDescription="@string/elMaleLabel"
+                android:text="@string/elMaleLabel" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tfilaLeiluy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:layout_marginStart="6dp"
+                android:contentDescription="@string/tfilaLeiliy_t"
+                android:text="@string/tfilaLeiliy_t"
+                />
         </LinearLayout>
-        <LinearLayout android:id="@+id/linearLayout4"
-            android:layout_height="wrap_content"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="20dp">
-        <Button
-            android:id="@+id/kadishYatomButton"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="5dp"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/kadishYatomLabel" />
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
 
-        <Button
-            android:id="@+id/kadishDerabananButton"
-            android:layout_width="0dp"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/KadishDerabanaLabel" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/kadishYatomButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="@string/kadishYatomLabel"
+                android:text="@string/kadishYatomLabel" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/kadishDerabananButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:contentDescription="@string/KadishDerabanaLabel"
+                android:text="@string/KadishDerabanaLabel" />
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+        </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
