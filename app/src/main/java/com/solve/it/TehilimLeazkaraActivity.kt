@@ -3,6 +3,10 @@ package com.solve.it
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.SpannedString
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -10,14 +14,16 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.bold
 import androidx.preference.PreferenceManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import androidx.core.text.buildSpannedString
+import androidx.navigation.Navigator
+
 
 class TehilimLeazkaraActivity : AppCompatActivity() {
-    private var sb: StringBuilder? = null
-    private lateinit var kyt: Array<String>
     private var isSon: Boolean = true
 
     // UI Components
@@ -105,51 +111,73 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
                 R.string.enterSfardi
             )
 
-        sendTextToView(string)
+        sendTextToView(updateNikud(string))
     }
 
     private fun handleAshkavaButtonClick() {
-            val str: String
-            if (genderToggle.isChecked) { // female
-                if (nameInput.text.isNotEmpty()) {
-                    str = resources.getString(R.string.ashkava_w1) + " " + nameInput.text + " בת " +
-                            parentNameInput.text + " " + resources.getString(R.string.ashkava_w2)
-                } else {
-                    Toast.makeText(this, R.string.error_missing_nams, Toast.LENGTH_LONG).show()
-                    str = resources.getString(R.string.ashkava_w1) + " " +
-                            resources.getString(R.string.ashkava_w_anon) + " " + resources.getString(
-                        R.string.ashkava_w2
-                    )
-                }
-            } else { // male
-                if (nameInput.text.isNotEmpty()) {
-                    str = resources.getString(R.string.ashkava_m1) + " " + nameInput.text + " בן " +
-                            parentNameInput.text + resources.getString(R.string.ashkava_m2)
-                } else {
-                    Toast.makeText(this, R.string.error_missing_nams, Toast.LENGTH_LONG).show()
-                    str = resources.getString(R.string.ashkava_m1) + " " +
-                            resources.getString(R.string.ashkava_m_anon) + " " + resources.getString(
-                        R.string.ashkava_m2
-                    )
-                }
+        if (nameInput.text.isEmpty()) {
+            Toast.makeText(this, R.string.error_missing_nams, Toast.LENGTH_LONG).show()
+        }
+
+        val wData = arrayOf(
+            R.string.ashkava_w1,
+            R.string.girl,
+            R.string.ashkava_w_anon,
+            R.string.ashkava_w2)
+        val mData = arrayOf(
+            R.string.ashkava_m1,
+            R.string.son,
+            R.string.ashkava_m_anon,
+            R.string.ashkava_m2)
+        genderToggle
+            .isChecked
+            .select(wData, mData)
+            .let { item ->
+                buildSpannedString {
+                    append(updateNikud(resources.getString(item[0])))
+                    append(" ")
+                    if (nameInput.text.isNotEmpty()) {
+                        bold {
+                            append(nameInput.text)
+                            append(" ")
+                            append(resources.getString(item[1]))
+                            append(" ")
+                            append(parentNameInput.text)
+                        }
+                    } else {
+                        append(resources.getString(item[2]))
+                    }
+                    append(" ")
+                    append(updateNikud(resources.getString(item[3]))) } }
+            .let {
+                sendTextToView(SpannableString(it))
             }
-            sendTextToView(str)
     }
 
+    private fun <T> Boolean.select(ifTrue: T, ifFalse: T): T = if (this) ifTrue else ifFalse
+
     private fun handleTfilaLeiluyButtonClick() {
-            val sb = StringBuilder(2048)
-            sb.append(resources.getString(R.string.tfila_generic_start))
-            sb.append(nameInput.text.toString() + " ")
-            if (genderToggle.isChecked) {
-                sb.append(resources.getString(R.string.girl) + " ")
-                sb.append(" " + parentNameInput.text.toString() + " ")
-                sb.append(resources.getString(R.string.tfilat_leiluy_w))
-            } else {
-                sb.append(resources.getString(R.string.son) + " ")
-                sb.append(" " + parentNameInput.text.toString() + " ")
-                sb.append(resources.getString(R.string.tfilat_leiluy_m))
+        val wData = Pair(R.string.girl, R.string.tfilat_leiluy_w)
+        val mData = Pair(R.string.son, R.string.tfilat_leiluy_m)
+
+        genderToggle
+            .isChecked
+            .select(wData, mData).let {
+                buildSpannedString {
+                    append(updateNikud(resources.getString(R.string.tfila_generic_start)))
+                    append(" ")
+                    bold {
+                        append(nameInput.text.toString())
+                        append(" ")
+                        append(resources.getString(it.first))
+                        append(" ")
+                        append(parentNameInput.text.toString())
+                    }
+                    append(" ")
+                    append(updateNikud(resources.getString(it.second))) } }
+            .let {
+                sendTextToView(SpannableString(it))
             }
-            sendTextToView(sb.toString())
     }
 
     private fun showAboutDialog() {
@@ -162,11 +190,16 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
             .show()
     }
     private fun handleTehilimButtonClick() {
-        setArray()
         val nameToProcess = "${nameInput.text.toString().trim()}${getString(R.string.neshama)}"
-        getTehilim(nameToProcess)
-        sendTextToView(sb.toString())
-        sb?.clear()
+
+        buildSpannedString {
+            setArray()
+                .forEach { append(it) }
+            getTehilim(nameToProcess)
+                .forEach { append(it) } }
+            .let {
+                sendTextToView(SpannableString(it))
+            }
     }
 
     private fun handleKadishYatomButtonClick() {
@@ -176,8 +209,9 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
                 2 -> resources.getString(R.string.kadishYatomEdot)
                 3 -> resources.getString(R.string.kadishyatomTeiman)
                 0 -> resources.getString(R.string.kadishYatomAshkenaz)
-                else -> resources.getString(R.string.kadishYatomAshkenaz)
-            }
+                else -> resources.getString(R.string.kadishYatomAshkenaz) }
+            .let {
+                updateNikud(it) }
             sendTextToView(str)
     }
 
@@ -188,36 +222,42 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
                 2 -> resources.getString(R.string.kadishDEdot)
                 3 -> resources.getString(R.string.kadishDTeiman)
                 0 -> resources.getString(R.string.kadishDAshkenaz)
-                else -> resources.getString(R.string.kadishDAshkenaz)
-        }
+                else -> resources.getString(R.string.kadishDAshkenaz) }
+            .let {
+                updateNikud(it)
+            }
         sendTextToView(str)
     }
 
     private fun handleElMaleButtonClick() {
         if (nameInput.text.isBlank() || parentNameInput.text.isBlank()) {
             Toast.makeText(this, R.string.error_missing_nams, Toast.LENGTH_LONG).show()
-            sendTextToView(getString(R.string.elMaleGeneric))
+            sendTextToView(updateNikud(getString(R.string.elMaleGeneric)))
             return
         }
 
-        val elMaleText = buildString {
-            append(getString(R.string.elMaleBeginGeneric))
-            append(" ${nameInput.text} ")
+        val elMaleText = buildSpannedString {
+            append(updateNikud(getString(R.string.elMaleBeginGeneric)))
+            append(updateNikud(" ${nameInput.text} "))
             append(if (genderToggle.isChecked) getString(R.string.son) else getString(R.string.girl))
-            append(" ${parentNameInput.text} ")
+            append(updateNikud(" ${parentNameInput.text} "))
             append(if (genderToggle.isChecked) getString(R.string.elMaleMan) else getString(R.string.elMaleWoman))
         }
 
-        sendTextToView(elMaleText)
+        sendTextToView(SpannableString(elMaleText))
     }
 
     private fun sendTextToView(text: String) {
+        sendTextToView(SpannableString(text))
+    }
+
+    private fun sendTextToView(text: Spannable) {
         val intent = Intent(this, ViewTehilim::class.java).apply {
             putExtra(Constants.FONT_TYPE, settingsManager.fontFamily)
             putExtra(Constants.TEXT_BLACK, settingsManager.isBlackText)
             Log.i("RAFI", "settingsManager.isNikudEnabled" + settingsManager.isNikudEnabled)
 
-            putExtra(Constants.TEXT_KEY, if (settingsManager.isNikudEnabled) text else removeNikud(text))
+            putExtra(Constants.TEXT_KEY, text)
         }
         startActivity(intent)
     }
@@ -250,53 +290,61 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
         }
     }
 
-    private fun removeNikud(text: String): String {
-        return text.replace(getString(R.string.nikud).toRegex(), "")
+    private fun updateNikud(text: String): String {
+        val nikud = getString(R.string.nikud).toRegex()
+
+        return if (settingsManager.isNikudEnabled) text else text.replace(nikud, "")
     }
 
-    private fun getTehilim(name: String) {
-        kyt = resources.getStringArray(R.array.kytn)
-        name.forEach { char ->
-            sb?.append(getKyt(char))
-        }
+    private fun getTehilim(name: String): List<SpannedString> {
+        val kyt = resources.getStringArray(R.array.kytn)
+
+        //  convert ABC into a Map<Char, Int>
+        //  this can be done only once
+        val alefBet = resources
+            .getStringArray(R.array.alef_bet)
+            .mapIndexed { index, letters ->
+                letters.map { it to index } }
+            .flatten()
+            .toMap()
+
+        return name.map { it to alefBet[it] }
+            .filter { it.second != null }
+            .map { (letter, index) ->
+                buildSpannedString {
+                    bold {
+                        append(letter.toString())
+                    }
+                    append("\n")
+                    append(updateNikud(kyt[index!!]))
+                    append("\n\n")
+                }}
     }
 
-    private fun getKyt(letter: Char): String {
+    private fun setArray(): List<SpannedString>  {
         val alefBet = resources.getStringArray(R.array.alef_bet)
-        for (i in alefBet.indices) {
-            if (alefBet[i].contains(letter)) {
-                return """
-                    $letter
-                    ${kyt[i]}
-                    
-                    
-                """.trimIndent()
+        return listOf(
+            Triple(11,  2, R.string.tehilimLg),
+            Triple( 8,  6, R.string.tehilimTz),
+            Triple( 9,  6, R.string.tehilimYz),
+            Triple(15,  1, R.string.tehilimAb),
+            Triple(22,  0, R.string.tehilimTza),
+            Triple(18,  3, R.string.tehilimKd),
+            Triple(18, 11, R.string.tehilimKl))
+            .map { (frst, scnd, res) ->
+                buildSpannedString {
+                    bold {
+                        append(getString(R.string.perek))
+                        append(" ")
+                        append(alefBet[frst])
+                        append("\"")
+                        append(alefBet[scnd])
+                        append("\n")
+                    }
+                    append(updateNikud(getString(res)))
+                    append("\n\n")
+                }
             }
-        }
-        return ""
-    }
-
-    private fun setArray() {
-        sb = StringBuilder(300)
-        val alefBet = resources.getStringArray(R.array.alef_bet)
-
-        val perakim = listOf(
-            Triple(alefBet[11], alefBet[2], R.string.tehilimLg),
-            Triple(alefBet[8], alefBet[6], R.string.tehilimTz),
-            Triple(alefBet[9], alefBet[6], R.string.tehilimYz),
-            Triple(alefBet[15], alefBet[1], R.string.tehilimAb),
-            Triple(alefBet[22], alefBet[0], R.string.tehilimTza),
-            Triple(alefBet[18], alefBet[3], R.string.tehilimKd),
-            Triple(alefBet[18], alefBet[11], R.string.tehilimKl)
-        )
-
-        perakim.forEach { (first, second, stringRes) ->
-            sb?.append("""
-                ${getString(R.string.perek)} $first"$second
-                ${getString(stringRes)}
-
-            """.trimIndent())
-        }
     }
 }
 

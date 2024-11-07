@@ -3,6 +3,7 @@ package com.solve.it
 import android.annotation.SuppressLint
 import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Spannable
 import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
@@ -126,7 +127,7 @@ class ViewTehilim : AppCompatActivity() {
             }
 
             // Set text content
-            textView.text = bundle.getString(Constants.TEXT_KEY)
+            textView.text = bundle.getCharSequence(Constants.TEXT_KEY) as Spannable
         }
 
         // Load saved text size
