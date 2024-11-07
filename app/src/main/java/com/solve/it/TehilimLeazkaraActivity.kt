@@ -202,31 +202,35 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
             }
     }
 
-    private fun handleKadishYatomButtonClick() {
-        var selection = settingsManager.nusach.toInt()
-        val str = when (selection) {
-                1 -> resources.getString(R.string.kadishYatomSfard)
-                2 -> resources.getString(R.string.kadishYatomEdot)
-                3 -> resources.getString(R.string.kadishyatomTeiman)
-                0 -> resources.getString(R.string.kadishYatomAshkenaz)
-                else -> resources.getString(R.string.kadishYatomAshkenaz) }
+    private fun handleKashishClick(kadish: Array<Int>) {
+        kadish
+            .getOrElse(settingsManager.nusach.toInt()) {
+                kadish[0] }
             .let {
-                updateNikud(it) }
-            sendTextToView(str)
+                sendTextToView(updateNikud(resources.getString(it)))
+            }
+    }
+
+    private fun handleKadishYatomButtonClick() {
+        handleKashishClick(
+            arrayOf(
+                R.string.kadishYatomAshkenaz,
+                R.string.kadishYatomSfard,
+                R.string.kadishYatomEdot,
+                R.string.kadishyatomTeiman
+            )
+        )
     }
 
     private fun handleKadishDerabananButtonClick() {
-        var selection = settingsManager.nusach.toInt()
-        val str = when (selection) {
-                1 -> resources.getString(R.string.kadishDSfard)
-                2 -> resources.getString(R.string.kadishDEdot)
-                3 -> resources.getString(R.string.kadishDTeiman)
-                0 -> resources.getString(R.string.kadishDAshkenaz)
-                else -> resources.getString(R.string.kadishDAshkenaz) }
-            .let {
-                updateNikud(it)
-            }
-        sendTextToView(str)
+        handleKashishClick(
+            arrayOf(
+                R.string.kadishDAshkenaz,
+                R.string.kadishDSfard,
+                R.string.kadishDEdot,
+                R.string.kadishDTeiman
+            )
+        )
     }
 
     private fun handleElMaleButtonClick() {
@@ -277,23 +281,27 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id._settings -> {
-                startActivity(Intent(this, SettingsActivity::class.java))
+        val actions = mapOf(
+            R.id._settings  to { startActivity(Intent(this, SettingsActivity::class.java)) },
+            R.id._about     to { showAboutDialog() }
+        )
+
+        return actions[item.itemId]
+            ?.let {
+                it.invoke()
                 true
             }
-            R.id._about -> {
-                showAboutDialog()
-                true
+            ?: run {
+                super.onOptionsItemSelected(item)
             }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     private fun updateNikud(text: String): String {
         val nikud = getString(R.string.nikud).toRegex()
 
-        return if (settingsManager.isNikudEnabled) text else text.replace(nikud, "")
+        return settingsManager
+            .isNikudEnabled
+            .select(text.replace(nikud, ""), text)
     }
 
     private fun getTehilim(name: String): List<SpannedString> {
@@ -354,30 +362,29 @@ class SettingsManager(private val context: Context) {
     val nusach: String
         get() {
             val key = context.getString(R.string.pref_list_key)
-            val value = prefs.getString(key, "0") ?: "0"
-            return value
+            return prefs.getString(key, "0") ?: "0"
         }
 
     val fontFamily: String
         get() {
-            val value = prefs.getString("pref_font_list", "0") ?: "0"
-            Log.d("SettingsManager", "Getting fontFamily: $value")
-            return value
+            return (prefs.getString("pref_font_list", "0") ?: "0").also {
+                Log.d("SettingsManager", "Getting fontFamily: $it")
+            }
         }
 
     val isNikudEnabled: Boolean
         get() {
             val key = context.getString(R.string.pref_is_font_enabled)
-            val value = prefs.getBoolean(key, true)
-            Log.d("SettingsManager", "Getting isNikudEnabled with key $key: $value")
-            return value
+            return prefs.getBoolean(key, true).also {
+                Log.d("SettingsManager", "Getting isNikudEnabled with key $key: $it")
+            }
         }
 
     val isBlackText: Boolean
         get() {
-            val value = prefs.getBoolean("pref_black_text", true)
-            Log.d("SettingsManager", "Getting isBlackText: $value")
-            return value
+            return prefs.getBoolean("pref_black_text", true).also {
+                Log.d("SettingsManager", "Getting isBlackText: $it")
+            }
         }
 }
 
