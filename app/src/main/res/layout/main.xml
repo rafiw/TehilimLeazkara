@@ -42,7 +42,7 @@
             tools:text="Current Nusach" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/entranceButton"
+            android:id="@+id/buttonEntrance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -124,7 +124,7 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/viewTehilim"
+            android:id="@+id/buttonTehilim"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -133,7 +133,7 @@
             android:text="@string/view_tel" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/ashkava_button"
+            android:id="@+id/buttonAshkava"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -148,7 +148,7 @@
             android:layout_marginBottom="16dp">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/elMaleRachamim"
+                android:id="@+id/buttonElMale"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -157,7 +157,7 @@
                 android:text="@string/elMaleLabel" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/tfilaLeiluy"
+                android:id="@+id/buttonTfilaLeiluy"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -176,22 +176,22 @@
             android:layout_marginBottom="16dp">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/kadishYatomButton"
+                android:id="@+id/buttonKadishY"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
-                android:contentDescription="@string/kadishYatomLabel"
-                android:text="@string/kadishYatomLabel" />
+                android:contentDescription="@string/kadishY_label"
+                android:text="@string/kadishY_label" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/kadishDerabananButton"
+                android:id="@+id/buttonKadishD"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                android:contentDescription="@string/KadishDerabanaLabel"
-                android:text="@string/KadishDerabanaLabel" />
+                android:contentDescription="@string/kadishD_label"
+                android:text="@string/kadishD_label" />
         </LinearLayout>
         </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

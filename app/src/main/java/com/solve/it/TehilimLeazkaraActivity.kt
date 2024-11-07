@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
-import android.text.SpannableStringBuilder
 import android.text.SpannedString
 import android.util.Log
 import android.view.Menu
@@ -20,24 +19,23 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import androidx.core.text.buildSpannedString
-import androidx.navigation.Navigator
 
 
 class TehilimLeazkaraActivity : AppCompatActivity() {
     private var isSon: Boolean = true
 
     // UI Components
-    private lateinit var thilimButton: MaterialButton
-    private lateinit var elMaleButton: MaterialButton
-    private lateinit var kadishYatomButton: MaterialButton
-    private lateinit var kadishDerabananButton: MaterialButton
-    private lateinit var entranceButton: MaterialButton
-    private lateinit var ashkavaButton: MaterialButton
-    private lateinit var tfilaLeiluyButton: MaterialButton
-    private lateinit var nameInput: EditText
-    private lateinit var parentNameInput: EditText
-    private lateinit var genderToggle: MaterialButton
-    private lateinit var configuredNusachText: TextView
+    private lateinit var buttonThilim: MaterialButton
+    private lateinit var buttonElMale: MaterialButton
+    private lateinit var buttonKadishY: MaterialButton
+    private lateinit var buttonKadishD: MaterialButton
+    private lateinit var buttonEntrance: MaterialButton
+    private lateinit var buttonAshkava: MaterialButton
+    private lateinit var buttonTfilaLeiluy: MaterialButton
+    private lateinit var inputName: EditText
+    private lateinit var inputParentName: EditText
+    private lateinit var toggleGender: MaterialButton
+    private lateinit var textViewNusach: TextView
     private lateinit var toolbar: MaterialToolbar
 
     // Settings
@@ -57,51 +55,51 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
     private fun initializeViews() {
         // Initialize all view references
         this.isSon = true
-        thilimButton = findViewById(R.id.viewTehilim)
-        nameInput = findViewById(R.id.name)
-        parentNameInput = findViewById(R.id.par_name)
-        ashkavaButton = findViewById(R.id.ashkava_button)
-        elMaleButton = findViewById(R.id.elMaleRachamim)
-        genderToggle = findViewById(R.id.son_daughter)
-        kadishYatomButton = findViewById(R.id.kadishYatomButton)
-        kadishDerabananButton = findViewById(R.id.kadishDerabananButton)
-        tfilaLeiluyButton = findViewById(R.id.tfilaLeiluy)
-        entranceButton = findViewById(R.id.entranceButton)
-        configuredNusachText = findViewById(R.id.configed_nusach)
+        buttonAshkava = findViewById(R.id.buttonAshkava)
+        buttonElMale = findViewById(R.id.buttonElMale)
+        buttonEntrance = findViewById(R.id.buttonEntrance)
+        buttonKadishD = findViewById(R.id.buttonKadishD)
+        buttonKadishY = findViewById(R.id.buttonKadishY)
+        buttonTfilaLeiluy = findViewById(R.id.buttonTfilaLeiluy)
+        buttonThilim = findViewById(R.id.buttonTehilim)
+        inputName = findViewById(R.id.name)
+        inputParentName = findViewById(R.id.par_name)
+        textViewNusach = findViewById(R.id.configed_nusach)
+        toggleGender = findViewById(R.id.son_daughter)
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
     }
 
     private fun setupClickListeners() {
-        thilimButton.setOnClickListener {
-            handleTehilimButtonClick()
+        buttonThilim.setOnClickListener {
+            handleButtonClick_Tehilim()
         }
 
-        elMaleButton.setOnClickListener {
-            handleElMaleButtonClick()
+        buttonElMale.setOnClickListener {
+            handleButtonClick_ElMale()
         }
-        genderToggle.setOnClickListener {
+        toggleGender.setOnClickListener {
             isSon = !isSon
-            genderToggle.text = if (isSon) getString(R.string.son) else getString(R.string.girl)
+            toggleGender.text = if (isSon) getString(R.string.son) else getString(R.string.girl)
         }
-        entranceButton.setOnClickListener {
+        buttonEntrance.setOnClickListener {
             handleEntranceButtonClick()
         }
 
-        ashkavaButton.setOnClickListener {
+        buttonAshkava.setOnClickListener {
             handleAshkavaButtonClick()
         }
 
-        kadishYatomButton.setOnClickListener {
-            handleKadishYatomButtonClick()
+        buttonKadishY.setOnClickListener {
+            handleButtonClick_KadishY()
         }
 
-        tfilaLeiluyButton.setOnClickListener {
+        buttonTfilaLeiluy.setOnClickListener {
             handleTfilaLeiluyButtonClick()
         }
 
-        kadishDerabananButton.setOnClickListener {
-            handleKadishDerabananButtonClick()
+        buttonKadishD.setOnClickListener {
+            handleButtonClick_KadishD()
         }
     }
 
@@ -115,7 +113,7 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
     }
 
     private fun handleAshkavaButtonClick() {
-        if (nameInput.text.isEmpty()) {
+        if (inputName.text.isEmpty()) {
             Toast.makeText(this, R.string.error_missing_nams, Toast.LENGTH_LONG).show()
         }
 
@@ -129,20 +127,20 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
             R.string.son,
             R.string.ashkava_m_anon,
             R.string.ashkava_m2)
-        genderToggle
+        toggleGender
             .isChecked
             .select(wData, mData)
             .let { item ->
                 buildSpannedString {
                     append(updateNikud(resources.getString(item[0])))
                     append(" ")
-                    if (nameInput.text.isNotEmpty()) {
+                    if (inputName.text.isNotEmpty()) {
                         bold {
-                            append(nameInput.text)
+                            append(inputName.text)
                             append(" ")
                             append(resources.getString(item[1]))
                             append(" ")
-                            append(parentNameInput.text)
+                            append(inputParentName.text)
                         }
                     } else {
                         append(resources.getString(item[2]))
@@ -160,18 +158,18 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
         val wData = Pair(R.string.girl, R.string.tfilat_leiluy_w)
         val mData = Pair(R.string.son, R.string.tfilat_leiluy_m)
 
-        genderToggle
+        toggleGender
             .isChecked
             .select(wData, mData).let {
                 buildSpannedString {
                     append(updateNikud(resources.getString(R.string.tfila_generic_start)))
                     append(" ")
                     bold {
-                        append(nameInput.text.toString())
+                        append(inputName.text.toString())
                         append(" ")
                         append(resources.getString(it.first))
                         append(" ")
-                        append(parentNameInput.text.toString())
+                        append(inputParentName.text.toString())
                     }
                     append(" ")
                     append(updateNikud(resources.getString(it.second))) } }
@@ -189,8 +187,8 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
             }
             .show()
     }
-    private fun handleTehilimButtonClick() {
-        val nameToProcess = "${nameInput.text.toString().trim()}${getString(R.string.neshama)}"
+    private fun handleButtonClick_Tehilim() {
+        val nameToProcess = "${inputName.text.toString().trim()}${getString(R.string.neshama)}"
 
         buildSpannedString {
             setArray()
@@ -202,7 +200,7 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
             }
     }
 
-    private fun handleKashishClick(kadish: Array<Int>) {
+    private fun handleButtonClick_Kadish(kadish: Array<Int>) {
         kadish
             .getOrElse(settingsManager.nusach.toInt()) {
                 kadish[0] }
@@ -211,30 +209,30 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
             }
     }
 
-    private fun handleKadishYatomButtonClick() {
-        handleKashishClick(
+    private fun handleButtonClick_KadishY() {
+        handleButtonClick_Kadish(
             arrayOf(
-                R.string.kadishYatomAshkenaz,
-                R.string.kadishYatomSfard,
-                R.string.kadishYatomEdot,
-                R.string.kadishyatomTeiman
+                R.string.kadishY_Ashkenaz,
+                R.string.kadishY_Sfard,
+                R.string.kadishY_Edot,
+                R.string.kadishY_Teiman
             )
         )
     }
 
-    private fun handleKadishDerabananButtonClick() {
-        handleKashishClick(
+    private fun handleButtonClick_KadishD() {
+        handleButtonClick_Kadish(
             arrayOf(
-                R.string.kadishDAshkenaz,
-                R.string.kadishDSfard,
-                R.string.kadishDEdot,
-                R.string.kadishDTeiman
+                R.string.kadishD_Ashkenaz,
+                R.string.kadishD_Sfard,
+                R.string.kadishD_Edot,
+                R.string.kadishD_Teiman
             )
         )
     }
 
-    private fun handleElMaleButtonClick() {
-        if (nameInput.text.isBlank() || parentNameInput.text.isBlank()) {
+    private fun handleButtonClick_ElMale() {
+        if (inputName.text.isBlank() || inputParentName.text.isBlank()) {
             Toast.makeText(this, R.string.error_missing_nams, Toast.LENGTH_LONG).show()
             sendTextToView(updateNikud(getString(R.string.elMaleGeneric)))
             return
@@ -242,10 +240,10 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
 
         val elMaleText = buildSpannedString {
             append(updateNikud(getString(R.string.elMaleBeginGeneric)))
-            append(updateNikud(" ${nameInput.text} "))
-            append(if (genderToggle.isChecked) getString(R.string.son) else getString(R.string.girl))
-            append(updateNikud(" ${parentNameInput.text} "))
-            append(if (genderToggle.isChecked) getString(R.string.elMaleMan) else getString(R.string.elMaleWoman))
+            append(updateNikud(" ${inputName.text} "))
+            append(if (toggleGender.isChecked) getString(R.string.son) else getString(R.string.girl))
+            append(updateNikud(" ${inputParentName.text} "))
+            append(if (toggleGender.isChecked) getString(R.string.elMaleMan) else getString(R.string.elMaleWoman))
         }
 
         sendTextToView(SpannableString(elMaleText))
@@ -301,7 +299,7 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
 
         return settingsManager
             .isNikudEnabled
-            .select(text.replace(nikud, ""), text)
+            .select(text, text.replace(nikud, ""))
     }
 
     private fun getTehilim(name: String): List<SpannedString> {
@@ -326,7 +324,8 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
                     append("\n")
                     append(updateNikud(kyt[index!!]))
                     append("\n\n")
-                }}
+                }
+            }
     }
 
     private fun setArray(): List<SpannedString>  {
