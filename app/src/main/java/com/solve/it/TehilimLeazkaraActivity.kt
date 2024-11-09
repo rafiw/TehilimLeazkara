@@ -366,7 +366,7 @@ class SettingsManager(private val context: Context) {
 
     val fontFamily: String
         get() {
-            return (prefs.getString("pref_font_list", "0") ?: "0").also {
+            return (prefs.getString(context.getString(R.string.pref_font_list), "0") ?: "0").also {
                 Log.d("SettingsManager", "Getting fontFamily: $it")
             }
         }

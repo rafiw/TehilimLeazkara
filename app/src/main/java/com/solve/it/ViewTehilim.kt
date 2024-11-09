@@ -114,8 +114,7 @@ class ViewTehilim : AppCompatActivity() {
                     val typeface = when (fontValue) {
                         "0" -> Typeface.DEFAULT
                         else -> {
-                            val fontPath = "fonts/$fontValue"
-                            Typeface.createFromAsset(assets, fontPath)
+                            Typeface.createFromAsset(assets, "font/$fontValue")
                         }
                     }
                     textView.typeface = typeface
