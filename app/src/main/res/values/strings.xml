@@ -115,7 +115,7 @@
     <string name="neshama">נשמה</string>
     <string name="def_nusach">הנוסח המוגדר הוא: </string>
     <!--PREFS-->
-    <string name="pref_font_list">font_list_pref</string>
+    <string name="pref_font_list">pref_font_list</string>
     <string name="pref_font_size">font_size</string>
     <string name="pref_black_text">black_text</string>
     <string name="pref_is_font_enabled">is_font_enabled</string>
