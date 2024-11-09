@@ -4,46 +4,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
-        android:layout="@layout/preferences_category"
-        app:title="הגדרות"
-        app:iconSpaceReserved="false">
+        android:minHeight="32dp"
+        app:iconSpaceReserved="false"
+        app:title="הגדרות">
 
         <ListPreference
-            app:key="@string/pref_list_key"
-            app:title="בחר את הנוסח"
+            android:minHeight="48dp"
+            app:defaultValue="0"
             app:dialogTitle="אשכנז/ספרד/תימן"
             app:entries="@array/nusachlistOptions"
             app:entryValues="@array/nusachlistValues"
-            app:defaultValue="0"
-            app:useSimpleSummaryProvider="true"
-            app:iconSpaceReserved="false" />
+            app:iconSpaceReserved="false"
+            app:key="@string/pref_list_key"
+            app:title="בחר את הנוסח"
+            app:useSimpleSummaryProvider="true" />
 
         <ListPreference
-            app:key="@string/pref_font_list"
-            app:title="בחר גופן"
+            android:minHeight="48dp"
+            app:defaultValue="0"
             app:dialogTitle="רשימת גופנים"
             app:entries="@array/fontlistOptions"
             app:entryValues="@array/fontlistValues"
-            app:defaultValue="0"
-            app:useSimpleSummaryProvider="true"
-            app:iconSpaceReserved="false" />
+            app:iconSpaceReserved="false"
+            app:key="@string/pref_font_list"
+            app:title="בחר גופן"
+            app:useSimpleSummaryProvider="true" />
 
         <SwitchPreferenceCompat
+            android:minHeight="48dp"
+            app:defaultValue="true"
+            app:iconSpaceReserved="false"
             app:key="@string/pref_is_font_enabled"
-            app:title="להציג ניקוד?"
             app:summary="האם להציג ניקוד בטקסט"
-            app:summaryOn="ניקוד מוצג"
             app:summaryOff="ניקוד לא מוצג"
-            app:defaultValue="true"
-            app:iconSpaceReserved="false" />
+            app:summaryOn="ניקוד מוצג"
+            app:title="להציג ניקוד?" />
 
         <SwitchPreferenceCompat
-            app:key="@string/pref_black_text"
-            app:title="צבע טקסט ורקע"
-            app:summary="קובע את צבע הטקסט והרקע לבן ושחור"
-            app:summaryOn="טקסט שחור על רקע לבן"
-            app:summaryOff="טקסט לבן על רקע שחור"
+            android:minHeight="48dp"
             app:defaultValue="true"
-            app:iconSpaceReserved="false" />
+            app:iconSpaceReserved="false"
+            app:key="@string/pref_black_text"
+            app:summary="קובע את צבע הטקסט והרקע לבן ושחור"
+            app:summaryOff="טקסט לבן על רקע שחור"
+            app:summaryOn="טקסט שחור על רקע לבן"
+            app:title="צבע טקסט ורקע" />
     </PreferenceCategory>
 </PreferenceScreen>

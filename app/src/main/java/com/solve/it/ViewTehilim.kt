@@ -19,6 +19,7 @@ import androidx.core.content.edit
 class ViewTehilim : AppCompatActivity() {
     private var textSize: Float = Constants.DEFAULT_FONT_SIZE_FLOAT
     private lateinit var scaleGestureDetector: ScaleGestureDetector
+
     private var lastScaleFactor = 1f
 
     private val scrollView: ScrollView by lazy {
@@ -53,7 +54,6 @@ class ViewTehilim : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        whiteTheme = intent?.extras?.getBoolean(Constants.TEXT_BLACK) == false
         setContentView(R.layout.view_thilim_new)
 
         // Make view clickable to support performClick
@@ -104,14 +104,13 @@ class ViewTehilim : AppCompatActivity() {
     private fun setupTextView() {
         intent?.extras?.let { bundle ->
             // Font handling (your existing code)
-            bundle.getBoolean(Constants.TEXT_BLACK). let { blackText ->
-                if (blackText) {
-                    textView.setTextColor(ContextCompat.getColor(this, R.color.black))
-                    textView.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
-                } else {
-                    textView.setBackgroundColor(ContextCompat.getColor(this, R.color.black))
-                    textView.setTextColor(ContextCompat.getColor(this, R.color.white))
-                }
+            bundle.getBoolean(Constants.TEXT_BLACK).let {
+                val fg = ContextCompat.getColor(this, if (it) R.color.black else R.color.white)
+                val bg = ContextCompat.getColor(this, if (it) R.color.white else R.color.black)
+
+                textView.setTextColor(fg)
+                textView.setBackgroundColor(bg)
+                scrollView.setBackgroundColor(bg)
             }
             bundle.getString(Constants.FONT_TYPE)?.let { fontValue ->
                 try {

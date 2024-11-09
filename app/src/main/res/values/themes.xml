@@ -34,5 +34,8 @@
         <item name="colorOnSurface">@color/md_theme_light_onSurface</item>
         <item name="backgroundColor">@color/md_theme_light_background</item>
         <item name="colorOnBackground">@color/md_theme_light_onBackground</item>
+        <item name="android:layoutDirection">rtl</item>
+        <item name="android:textDirection">rtl</item>
+        <item name="android:textAlignment">viewStart</item>
     </style>
 </resources>

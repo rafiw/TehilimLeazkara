@@ -6,11 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="?attr/colorSurface"
     tools:context=".TehilimLeazkaraActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimaryContainer">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -18,8 +20,9 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             android:elevation="4dp"
-            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"/>
+            android:textAlignment="center"
+            android:theme="@style/ThemeOverlay.Material3.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.Material3.Light"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -27,25 +30,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layoutDirection="rtl"
         android:padding="16dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        >
+        android:background="?attr/colorSurface"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/configed_nusach"
+            android:id="@+id/configured_nusach"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="30dp"
             android:textAlignment="center"
+            android:textColor="?attr/colorOnSurface"
             android:textAppearance="?attr/textAppearanceSubtitle1"
             tools:text="Current Nusach" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonEntrance"
+            style="@style/Widget.Material3.Button.TonalButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:textAlignment="center"
             android:layout_marginBottom="24dp"
             android:contentDescription="@string/EntranceButtonText"
             android:text="@string/EntranceButtonText" />
@@ -55,78 +62,77 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             app:cardElevation="2dp"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
             app:cardUseCompatPadding="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:background="?attr/colorSurface"
                 android:padding="8dp">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    android:textColorHint="@color/black"
-                    android:layoutDirection="rtl"
-                    app:boxBackgroundColor="@color/white"
-                    app:boxStrokeColor="@color/black"
-                    app:hintTextColor="@color/black">
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:textAlignment="center"
+                    android:layout_marginStart="8dp"
+                    android:layoutDirection="rtl">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/par_name"
+                        android:id="@+id/name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textDirection="rtl"
-                        android:hint="@string/writeParName"/>
+                        android:textColor="?attr/colorOnSurface"
+                        android:hint="@string/writeDethName"
+                        android:textDirection="rtl" />
                 </com.google.android.material.textfield.TextInputLayout>
-
                 <com.google.android.material.button.MaterialButtonToggleGroup
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical">
+                    android:minWidth="60dp"
+                    android:textAlignment="center">
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/son_daughter"
-                        style="?attr/materialButtonOutlinedStyle"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
                         android:layout_width="wrap_content"
+                        android:textAlignment="center"
                         android:layout_height="match_parent"
-                        android:minWidth="48dp"
-                        android:text="@string/son"
-                        android:contentDescription="gender"
-                        app:strokeColor="@color/black"
-                        app:strokeWidth="1dp"
-                        android:textColor="@color/black" />
+                        android:contentDescription="@string/gender"
+                        android:minWidth="60dp"
+                        android:text="@string/son" />
                 </com.google.android.material.button.MaterialButtonToggleGroup>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginStart="8dp"
-                    android:textColorHint="@color/black"
-                    android:layoutDirection="rtl"
-                    app:boxBackgroundColor="@color/white"
-                    app:boxStrokeColor="@color/black"
-                    app:hintTextColor="@color/black">
+                    android:layout_marginEnd="8dp"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:textColorHint="?attr/colorOnSurface"
+                    android:layoutDirection="rtl">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/name"
+                        android:id="@+id/par_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:hint="@string/writeDethName"
+                        android:textColor="?attr/colorOnSurface"
                         android:textDirection="rtl"
-                        />
+                        android:hint="@string/writeParName"/>
                 </com.google.android.material.textfield.TextInputLayout>
+
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonTehilim"
+            style="@style/Widget.Material3.Button.TonalButton"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="24dp"
             android:contentDescription="@string/view_tel"
@@ -134,8 +140,10 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonAshkava"
+            style="@style/Widget.Material3.Button.TonalButton"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="24dp"
             android:contentDescription="@string/ashkava_label_w"
@@ -149,24 +157,27 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonElMale"
+                style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textAlignment="center"
                 android:layout_marginEnd="6dp"
                 android:contentDescription="@string/elMaleLabel"
                 android:text="@string/elMaleLabel" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonTfilaLeiluy"
+                style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:maxLines="1"
+                android:textAlignment="center"
                 android:singleLine="true"
                 android:layout_marginStart="6dp"
                 android:contentDescription="@string/tfilaLeiliy_t"
-                android:text="@string/tfilaLeiliy_t"
-                />
+                android:text="@string/tfilaLeiliy_t" />
         </LinearLayout>
 
         <LinearLayout
@@ -177,7 +188,9 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonKadishY"
+                style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="0dp"
+                android:textAlignment="center"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
@@ -186,12 +199,14 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonKadishD"
+                style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="0dp"
+                android:textAlignment="center"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
                 android:contentDescription="@string/kadishD_label"
                 android:text="@string/kadishD_label" />
         </LinearLayout>
-        </LinearLayout>
+    </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

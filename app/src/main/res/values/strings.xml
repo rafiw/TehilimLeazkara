@@ -113,13 +113,14 @@
     <string name="error_missing_nams">לא כתבת שם ושם האב יוצג נוסח ללא שם</string>
     <string name="error_float">לא בחרתם מספר שלם בהגדרות</string>
     <string name="neshama">נשמה</string>
-    <string name="def_nusach">הנוסח המוגדר הוא: </string>
+    <string name="def_nusach">הנוסח המוגדר הוא: %s</string>
     <!--PREFS-->
     <string name="pref_font_list">pref_font_list</string>
     <string name="pref_font_size">font_size</string>
     <string name="pref_black_text">black_text</string>
     <string name="pref_is_font_enabled">is_font_enabled</string>
     <string name="pref_list_key">listpref</string>
+    <string name="gender">מין</string>
     <string name="settings_title">הגדרות</string>
 
 </resources>
