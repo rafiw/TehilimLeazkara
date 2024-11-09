@@ -14,7 +14,7 @@
         android:roundIcon="@drawable/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.App"
+        android:theme="@style/Theme.YourApp"
 		tools:targetApi="33">
         <activity
             android:name=".TehilimLeazkaraActivity"
@@ -30,7 +30,7 @@
         />
         <activity
             android:name=".SettingsActivity"
-            android:theme="@style/SettingsTheme"
+            android:theme="@style/Theme.YourApp"
             android:parentActivityName=".TehilimLeazkaraActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

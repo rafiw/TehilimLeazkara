@@ -13,6 +13,7 @@ import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 
 class ViewTehilim : AppCompatActivity() {
@@ -52,14 +53,8 @@ class ViewTehilim : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        setContentView(
-            if (intent?.extras?.getBoolean(Constants.TEXT_BLACK) == true) {
-                R.layout.view_thilim_new_white
-            } else {
-                R.layout.view_thilim_new
-            }
-        )
+//        whiteTheme = intent?.extras?.getBoolean(Constants.TEXT_BLACK) == false
+        setContentView(R.layout.view_thilim_new)
 
         // Make view clickable to support performClick
         scrollView.isClickable = true
@@ -109,6 +104,15 @@ class ViewTehilim : AppCompatActivity() {
     private fun setupTextView() {
         intent?.extras?.let { bundle ->
             // Font handling (your existing code)
+            bundle.getBoolean(Constants.TEXT_BLACK). let { blackText ->
+                if (blackText) {
+                    textView.setTextColor(ContextCompat.getColor(this, R.color.black))
+                    textView.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
+                } else {
+                    textView.setBackgroundColor(ContextCompat.getColor(this, R.color.black))
+                    textView.setTextColor(ContextCompat.getColor(this, R.color.white))
+                }
+            }
             bundle.getString(Constants.FONT_TYPE)?.let { fontValue ->
                 try {
                     val typeface = when (fontValue) {

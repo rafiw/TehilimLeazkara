@@ -16,11 +16,3 @@
         app:showAsAction="never"
         android:title="@string/about_title"/>
 </menu>
-    <!--
-        <group android:id="@+id/mainGroup" android:visible="true" android:menuCategory="system" android:enabled="true">
-            <item android:id="@+id/_settings" android:title="הגדרות" ></item>
-            <item android:id="@+id/_about" android:title="אודות" ></item>
-        </group>
-    </menu>
--->
-
