@@ -14,12 +14,12 @@
         android:id="@+id/thilimtext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:gravity="start"
-        android:lineSpacingMultiplier="1.3"
         android:importantForAccessibility="yes"
-        android:background="#ffffff"
-        android:textColor="#000000"
+        android:lineSpacingMultiplier="1.3"
         android:textAlignment="textStart"
-        android:typeface="serif"/>
+        android:textColor="@color/black"
+        android:typeface="serif" />
 
 </ScrollView>
