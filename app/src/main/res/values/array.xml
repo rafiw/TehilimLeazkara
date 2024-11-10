@@ -15,7 +15,6 @@
     <string-array name="fontlistOptions">
         <item >רגיל</item>
         <item >כתר ארם צובה</item>
-        <item >SBL</item>
         <item >שמוליק</item>
         <item >שופר</item>
         <item >עזרא-סיל</item>
@@ -26,7 +25,6 @@
     <string-array name="fontlistValues">
         <item >0</item>
         <item >keter_aram_tsova.ttf</item>
-        <item >sbl_hebrew.ttf</item>
         <item >shmulik_clm.ttf</item>
         <item >shofar_regular.ttf</item>
         <item >sileot.ttf</item>

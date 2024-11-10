@@ -76,6 +76,7 @@ class ViewTehilim : AppCompatActivity() {
             when (event.actionMasked) {
                 MotionEvent.ACTION_DOWN -> {
                     isScaling = false
+
                 }
                 MotionEvent.ACTION_MOVE -> {
                     // Handle both scroll and scale
