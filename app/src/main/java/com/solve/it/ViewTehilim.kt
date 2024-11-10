@@ -33,13 +33,13 @@ class ViewTehilim : AppCompatActivity() {
     private inner class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener() {
         override fun onScale(detector: ScaleGestureDetector): Boolean {
             // Smooth scaling factor
-            val scaleFactor = (detector.scaleFactor - 1) * 0.5f + 1
+            val scaleFactor = (detector.scaleFactor - 1) * 0.7f + 1
 
             // Calculate new text size
             var newSize = textSize * scaleFactor
 
             // Constrain text size between minimum and maximum values
-            newSize = newSize.coerceIn(8f, 72f)
+            newSize = newSize.coerceIn(12f, 40f)
 
             if (newSize != textSize) {
                 textSize = newSize
