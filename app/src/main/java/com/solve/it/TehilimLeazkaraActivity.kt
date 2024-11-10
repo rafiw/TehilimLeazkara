@@ -26,6 +26,7 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
 
     // UI Components
     private lateinit var buttonThilim: MaterialButton
+    private lateinit var buttonMishnayot: MaterialButton
     private lateinit var buttonElMale: MaterialButton
     private lateinit var buttonKadishY: MaterialButton
     private lateinit var buttonKadishD: MaterialButton
@@ -62,6 +63,7 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
         buttonKadishY = findViewById(R.id.buttonKadishY)
         buttonTfilaLeiluy = findViewById(R.id.buttonTfilaLeiluy)
         buttonThilim = findViewById(R.id.buttonTehilim)
+        buttonMishnayot = findViewById(R.id.buttonMishnayot)
         inputName = findViewById(R.id.name)
         inputParentName = findViewById(R.id.par_name)
         textViewNusach = findViewById(R.id.configured_nusach)
@@ -72,9 +74,12 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
 
     private fun setupClickListeners() {
         buttonThilim.setOnClickListener {
-            handleButtonClick_Tehilim()
+            handleButtonClickTehilim()
         }
 
+        buttonMishnayot.setOnClickListener {
+            handleButtonClickMishnayot()
+        }
         buttonElMale.setOnClickListener {
             handleButtonClick_ElMale()
         }
@@ -108,7 +113,7 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
     }
 
     private fun handleAshkavaButtonClick() {
-        if (inputName.text.isEmpty()) {
+        if (inputName.text.isBlank() || inputParentName.text.isBlank()) {
             Toast.makeText(this, R.string.error_missing_nams, Toast.LENGTH_LONG).show()
         }
 
@@ -182,11 +187,22 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
             }
             .show()
     }
-    private fun handleButtonClick_Tehilim() {
+    private fun handleButtonClickMishnayot() {
         val nameToProcess = "${inputName.text.toString().trim()}${getString(R.string.neshama)}"
 
         buildSpannedString {
-            setArray()
+            getMishnayot(nameToProcess)
+                .forEach { append(it) } }
+            .let {
+                sendTextToView(SpannableString(it))
+            }
+    }
+
+    private fun handleButtonClickTehilim() {
+        val nameToProcess = "${inputName.text.toString().trim()}${getString(R.string.neshama)}"
+
+        buildSpannedString {
+            setTehilimArray()
                 .forEach { append(it) }
             getTehilim(nameToProcess)
                 .forEach { append(it) } }
@@ -245,9 +261,9 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
         val elMaleText = buildSpannedString {
             append(updateNikud(getString(R.string.elMaleBeginGeneric)))
             append(updateNikud(" ${inputName.text} "))
-            append(if (toggleGender.isChecked) getString(R.string.son) else getString(R.string.girl))
+            append(if (toggleGender.isChecked) getString(R.string.girl) else getString(R.string.son))
             append(updateNikud(" ${inputParentName.text} "))
-            append(if (toggleGender.isChecked) getString(R.string.elMaleMan) else getString(R.string.elMaleWoman))
+            append(if (toggleGender.isChecked) getString(R.string.elMaleWoman) else getString(R.string.elMaleMan))
         }
 
         sendTextToView(SpannableString(elMaleText))
@@ -336,7 +352,35 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
             }
     }
 
-    private fun setArray(): List<SpannedString>  {
+    private fun getMishnayot(name: String): List<SpannedString> {
+        val mishnayotSource = resources.getStringArray(R.array.mishnayot_source)
+        val mishnayot = resources.getStringArray(R.array.mishnayot)
+        //  convert ABC into a Map<Char, Int>
+        //  this can be done only once
+        val alefBet = resources
+            .getStringArray(R.array.alef_bet)
+            .mapIndexed { index, letters ->
+                letters.map { it to index } }
+            .flatten()
+            .toMap()
+
+        return name.map { it to alefBet[it] }
+            .filter { it.second != null }
+            .map { (letter, index) ->
+                buildSpannedString {
+                    bold {
+                        append(letter.toString())
+                        append("\n")
+                        append(mishnayotSource[index!!].toString())
+                    }
+                    append("\n")
+                    append(updateNikud(mishnayot[index!!]))
+                    append("\n\n")
+                }
+            }
+    }
+
+    private fun setTehilimArray(): List<SpannedString>  {
         val alefBet = resources.getStringArray(R.array.alef_bet)
         return listOf(
             Triple(11,  2, R.string.tehilimLg),
@@ -362,6 +406,7 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
             }
     }
 }
+
 
 // Helper class for managing settings
 class SettingsManager(private val context: Context) {
