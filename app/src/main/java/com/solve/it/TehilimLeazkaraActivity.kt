@@ -2,6 +2,7 @@ package com.solve.it
 
 import android.content.Context
 import android.content.Intent
+import android.media.AudioManager
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
@@ -51,8 +52,19 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
         initializeViews()
         setupClickListeners()
         updateNusachDisplay()
+        checkIfPhoneIsSilent()
     }
 
+    private fun checkIfPhoneIsSilent() {
+        val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+
+        if (audioManager.ringerMode == AudioManager.RINGER_MODE_NORMAL) {
+            Toast.makeText(this,
+                R.string.quiet,
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
     private fun initializeViews() {
         // Initialize all view references
         this.isSon = true
