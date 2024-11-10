@@ -167,6 +167,9 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
     private fun <T> Boolean.select(ifTrue: T, ifFalse: T): T = if (this) ifTrue else ifFalse
 
     private fun handleTfilaLeiluyButtonClick() {
+        if (inputName.text.isBlank() || inputParentName.text.isBlank()) {
+            Toast.makeText(this, R.string.error_missing_nams, Toast.LENGTH_LONG).show()
+        }
         val wData = Pair(R.string.girl, R.string.tfilat_leiluy_w)
         val mData = Pair(R.string.son, R.string.tfilat_leiluy_m)
 
@@ -201,7 +204,9 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
     }
     private fun handleButtonClickMishnayot() {
         val nameToProcess = "${inputName.text.toString().trim()}${getString(R.string.neshama)}"
-
+        if (inputName.text.isBlank() || inputParentName.text.isBlank()) {
+            Toast.makeText(this, R.string.error_missing_nams, Toast.LENGTH_LONG).show()
+        }
         buildSpannedString {
             getMishnayot(nameToProcess)
                 .forEach { append(it) } }
@@ -212,7 +217,9 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
 
     private fun handleButtonClickTehilim() {
         val nameToProcess = "${inputName.text.toString().trim()}${getString(R.string.neshama)}"
-
+        if (inputName.text.isBlank() || inputParentName.text.isBlank()) {
+            Toast.makeText(this, R.string.error_missing_nams, Toast.LENGTH_LONG).show()
+        }
         buildSpannedString {
             setTehilimArray()
                 .forEach { append(it) }
