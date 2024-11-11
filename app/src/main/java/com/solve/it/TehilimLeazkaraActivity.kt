@@ -216,7 +216,15 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
     }
 
     private fun handleButtonClickTehilim() {
-        val nameToProcess = "${inputName.text.toString().trim()}${getString(R.string.neshama)}"
+        val suffix = arrayOf(
+            getString(R.string.neshama),
+            getString(R.string.neshama),
+            getString(R.string.neshama),
+            getString(R.string.neshama),
+            getString(R.string.kra_satan)
+        )
+        val nameToProcess = "${inputName.text.toString().trim()}${suffix[settingsManager.nusach.toInt()]}"
+
         if (inputName.text.isBlank() || inputParentName.text.isBlank()) {
             Toast.makeText(this, R.string.error_missing_nams, Toast.LENGTH_LONG).show()
         }
@@ -245,7 +253,8 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
                 R.string.kadishY_Ashkenaz,
                 R.string.kadishY_Sfard,
                 R.string.kadishY_Edot,
-                R.string.kadishY_Teiman
+                R.string.kadishY_Teiman,
+                R.string.kadishY_Edot,
             )
         )
     }
@@ -265,7 +274,8 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
                 R.string.kadishD_Ashkenaz,
                 R.string.kadishD_Sfard,
                 R.string.kadishD_Edot,
-                R.string.kadishD_Teiman
+                R.string.kadishD_Teiman,
+                R.string.kadishD_Edot,
             )
         )
     }

@@ -161,6 +161,7 @@
     <string name="error_missing_nams">לא כתבת שם ושם האב יוצג נוסח ללא שם</string>
     <string name="error_float">לא בחרתם מספר שלם בהגדרות</string>
     <string name="neshama">נשמה</string>
+    <string name="kra_satan">קרעשטן</string>
     <string name="quiet">זהירות הטלפון לא במצב שקט</string>
     <string name="def_nusach">הנוסח המוגדר הוא: %s</string>
     <!--PREFS-->
