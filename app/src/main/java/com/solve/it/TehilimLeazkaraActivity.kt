@@ -1,7 +1,10 @@
 package com.solve.it
 
+import android.animation.ValueAnimator
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.media.AudioManager
 import android.os.Bundle
 import android.text.Spannable
@@ -20,6 +23,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import androidx.core.text.buildSpannedString
+import com.google.android.material.textfield.TextInputLayout
 
 
 class TehilimLeazkaraActivity : AppCompatActivity() {
@@ -35,7 +39,9 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
     private lateinit var buttonAshkava: MaterialButton
     private lateinit var buttonTfilaLeiluy: MaterialButton
     private lateinit var inputName: EditText
+    private lateinit var nameLayout: TextInputLayout
     private lateinit var inputParentName: EditText
+    private lateinit var parentNameLayout: TextInputLayout
     private lateinit var toggleGender: MaterialButton
     private lateinit var textViewNusach: TextView
     private lateinit var toolbar: MaterialToolbar
@@ -77,7 +83,9 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
         buttonThilim = findViewById(R.id.buttonTehilim)
         buttonMishnayot = findViewById(R.id.buttonMishnayot)
         inputName = findViewById(R.id.name)
+        nameLayout = findViewById(R.id.name_layout)
         inputParentName = findViewById(R.id.par_name)
+        parentNameLayout = findViewById(R.id.par_name_layout)
         textViewNusach = findViewById(R.id.configured_nusach)
         toggleGender = findViewById(R.id.son_daughter)
         toolbar = findViewById(R.id.toolbar)
@@ -202,13 +210,39 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
             }
             .show()
     }
+
+    private fun showErrorWithBlink(textInputLayout: TextInputLayout) {
+        textInputLayout.error = "חסר ערך"
+
+        val errorAnimation = ValueAnimator.ofFloat(0f, 1f).apply {
+            duration = 200 // Duration for each blink
+            repeatCount = 2 // Number of blinks (2 means blink 3 times)
+            repeatMode = ValueAnimator.REVERSE
+
+            addUpdateListener { animator ->
+                val alpha = animator.animatedValue as Float
+                textInputLayout.boxStrokeErrorColor = ColorStateList.valueOf(
+                    Color.argb(
+                        (255 * alpha).toInt(),
+                        255, // Red
+                        0,   // Green
+                        0    // Blue
+                    )
+                )
+            }
+        }
+
+        errorAnimation.start()
+    }
+
     private fun handleButtonClickMishnayot() {
-        val nameToProcess = "${inputName.text.toString().trim()}${getString(R.string.neshama)}"
-        if (inputName.text.isBlank() || inputParentName.text.isBlank()) {
-            Toast.makeText(this, R.string.error_missing_nams, Toast.LENGTH_LONG).show()
+        if (inputName.text.isBlank()) {
+            Toast.makeText(this, R.string.error_missing_name, Toast.LENGTH_LONG).show()
+            showErrorWithBlink(nameLayout)
+            return
         }
         buildSpannedString {
-            getMishnayot(nameToProcess)
+            getMishnayot(inputName.text.toString().trim())
                 .forEach { append(it) } }
             .let {
                 sendTextToView(SpannableString(it))

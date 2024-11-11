@@ -159,6 +159,7 @@
     <string name="deceseName">שם הנפטר</string>
     <string name="error_small">גדול הפונט שגוי, 26 נבחר כבררת מחדל</string>
     <string name="error_missing_nams">לא כתבת שם ושם האב יוצג נוסח ללא שם</string>
+    <string name="error_missing_name">לא כתבת שם</string>
     <string name="error_float">לא בחרתם מספר שלם בהגדרות</string>
     <string name="neshama">נשמה</string>
     <string name="kra_satan">קרעשטן</string>
