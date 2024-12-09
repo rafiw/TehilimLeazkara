@@ -51,6 +51,15 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
         SettingsManager(applicationContext)
     }
 
+    private val alefBet by lazy {
+        resources
+            .getStringArray(R.array.alef_bet)
+            .mapIndexed { index, letters ->
+                letters.map { it to index } }
+            .flatten()
+            .toMap()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main)
@@ -392,15 +401,6 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
     private fun getTehilim(name: String): List<SpannedString> {
         val kyt = resources.getStringArray(R.array.kytn)
 
-        //  convert ABC into a Map<Char, Int>
-        //  this can be done only once
-        val alefBet = resources
-            .getStringArray(R.array.alef_bet)
-            .mapIndexed { index, letters ->
-                letters.map { it to index } }
-            .flatten()
-            .toMap()
-
         return name.map { it to alefBet[it] }
             .filter { it.second != null }
             .map { (letter, index) ->
@@ -418,14 +418,6 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
     private fun getMishnayot(name: String): List<SpannedString> {
         val mishnayotSource = resources.getStringArray(R.array.mishnayot_source)
         val mishnayot = resources.getStringArray(R.array.mishnayot)
-        //  convert ABC into a Map<Char, Int>
-        //  this can be done only once
-        val alefBet = resources
-            .getStringArray(R.array.alef_bet)
-            .mapIndexed { index, letters ->
-                letters.map { it to index } }
-            .flatten()
-            .toMap()
 
         return name.map { it to alefBet[it] }
             .filter { it.second != null }
