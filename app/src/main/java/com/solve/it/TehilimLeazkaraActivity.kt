@@ -442,7 +442,7 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
             Triple( 8,  6, R.string.tehilimTz),
             Triple( 9,  6, R.string.tehilimYz),
             Triple(15,  1, R.string.tehilimAb),
-            Triple(22,  0, R.string.tehilimTza),
+            Triple(17,  0, R.string.tehilimTza),
             Triple(18,  3, R.string.tehilimKd),
             Triple(18, 11, R.string.tehilimKl))
             .map { (frst, scnd, res) ->
@@ -450,9 +450,9 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
                     bold {
                         append(getString(R.string.perek))
                         append(" ")
-                        append(alefBet[frst])
+                        append(alefBet[frst][0])
                         append("\"")
-                        append(alefBet[scnd])
+                        append(alefBet[scnd][0])
                         append("\n")
                     }
                     append(updateNikud(getString(res)))
