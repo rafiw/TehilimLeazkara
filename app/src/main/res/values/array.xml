@@ -2,10 +2,10 @@
 <resources>
     <string-array name="nusachlistOptions">
         <item>אשכנז</item>
+        <item >מרוקו</item>
         <item >ספרד</item>
         <item >עדות המזרח</item>
         <item >תימן</item>
-        <item >מרוקו</item>
     </string-array>
     <string-array name="nusachlistValues">
         <item>0</item>

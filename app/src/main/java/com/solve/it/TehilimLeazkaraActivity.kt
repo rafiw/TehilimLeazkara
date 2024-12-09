@@ -261,10 +261,10 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
     private fun handleButtonClickTehilim() {
         val suffix = arrayOf(
             getString(R.string.neshama),
+            getString(R.string.kra_satan),
             getString(R.string.neshama),
             getString(R.string.neshama),
             getString(R.string.neshama),
-            getString(R.string.kra_satan)
         )
         val nameToProcess = "${inputName.text.toString().trim()}${suffix[settingsManager.nusach.toInt()]}"
 
@@ -294,10 +294,10 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
         handleButtonClick_Kadish(
             arrayOf(
                 R.string.kadishY_Ashkenaz,
+                R.string.kadishY_Edot,
                 R.string.kadishY_Sfard,
                 R.string.kadishY_Edot,
                 R.string.kadishY_Teiman,
-                R.string.kadishY_Edot,
             )
         )
     }
@@ -315,10 +315,10 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
         handleButtonClick_Kadish(
             arrayOf(
                 R.string.kadishD_Ashkenaz,
+                R.string.kadishD_Edot,
                 R.string.kadishD_Sfard,
                 R.string.kadishD_Edot,
                 R.string.kadishD_Teiman,
-                R.string.kadishD_Edot,
             )
         )
     }
@@ -358,8 +358,8 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
 
     private fun updateNusachDisplay() {
         settingsManager.nusach.toInt().let {
-            textViewNusach.setText(resources.getString(R.string.def_nusach,
-                resources.getStringArray(R.array.nusachlistOptions)[it]))
+            textViewNusach.text = resources.getString(R.string.def_nusach,
+                resources.getStringArray(R.array.nusachlistOptions)[it])
 
         }
     }
