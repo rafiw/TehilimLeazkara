@@ -161,7 +161,7 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
             .select(wData, mData)
             .let { item ->
                 buildSpannedString {
-                    append(updateNikud(resources.getString(item[0])))
+                    append(chainText(resources.getString(item[0])))
                     append(" ")
                     if (inputName.text.isNotEmpty()) {
                         bold {
@@ -175,7 +175,7 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
                         append(resources.getString(item[2]))
                     }
                     append(" ")
-                    append(updateNikud(resources.getString(item[3]))) } }
+                    append(chainText(resources.getString(item[3]))) } }
             .let {
                 sendTextToView(SpannableString(it))
             }
@@ -194,7 +194,7 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
             .isChecked
             .select(wData, mData).let {
                 buildSpannedString {
-                    append(updateNikud(resources.getString(R.string.tfila_generic_start)))
+                    append(chainText(resources.getString(R.string.tfila_generic_start)))
                     append(" ")
                     bold {
                         append(inputName.text.toString())
@@ -204,7 +204,7 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
                         append(inputParentName.text.toString())
                     }
                     append(" ")
-                    append(updateNikud(resources.getString(it.second))) } }
+                    append(chainText(resources.getString(it.second))) } }
             .let {
                 sendTextToView(SpannableString(it))
             }
@@ -286,7 +286,7 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
             .getOrElse(settingsManager.nusach.toInt()) {
                 kadish[0] }
             .let {
-                sendTextToView(updateNikud(resources.getString(it)))
+                sendTextToView(chainText(resources.getString(it)))
             }
     }
 
@@ -326,15 +326,15 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
     private fun handleButtonClick_ElMale() {
         if (inputName.text.isBlank() || inputParentName.text.isBlank()) {
             Toast.makeText(this, R.string.error_missing_nams, Toast.LENGTH_LONG).show()
-            sendTextToView(updateNikud(getString(R.string.elMaleGeneric)))
+            sendTextToView(chainText(getString(R.string.elMaleGeneric)))
             return
         }
 
         val elMaleText = buildSpannedString {
-            append(updateNikud(getString(R.string.elMaleBeginGeneric)))
-            append(updateNikud(" ${inputName.text} "))
+            append(chainText(getString(R.string.elMaleBeginGeneric)))
+            append(chainText(" ${inputName.text} "))
             append(if (toggleGender.isChecked) getString(R.string.girl) else getString(R.string.son))
-            append(updateNikud(" ${inputParentName.text} "))
+            append(chainText(" ${inputParentName.text} "))
             append(if (toggleGender.isChecked) getString(R.string.elMaleWoman) else getString(R.string.elMaleMan))
         }
 
@@ -389,6 +389,9 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
                 super.onOptionsItemSelected(item)
             }
     }
+    private fun chainText(text: String): String {
+        return updateNikud(removeElohim(removeGodName(text)));
+    }
 
     private fun updateNikud(text: String): String {
         val nikud = getString(R.string.nikud).toRegex()
@@ -396,6 +399,27 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
         return settingsManager
             .isNikudEnabled
             .select(text, text.replace(nikud, ""))
+    }
+
+    private fun removeGodName(text: String): String {
+        return settingsManager
+            .showGodName
+            .select(text, text.replace("אֲדֹנָי", "אֲדֹנָ-י")
+                              .replace("יְהוָה","יְהוָ-ה"))
+    }
+
+    private fun removeElohim(text: String): String {
+        val replacements = mapOf(
+            "אֱלֹהִים" to "אֱלֹקִים",
+            "אֱלֹהֵינוּ" to "אֱלֹקֵינוּ",
+            "אֱלֹהָי" to "אֱלֹקָי",
+            "אֱלֹהָיו" to "אֱלֹקָיו"
+        )
+        val replacedText = replacements.entries.fold(text) { acc, (old, new) ->
+            acc.replace(old, new)
+        }
+
+        return settingsManager.isElohim.select(text, replacedText)
     }
 
     private fun getTehilim(name: String): List<SpannedString> {
@@ -409,7 +433,7 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
                         append(letter.toString())
                     }
                     append("\n")
-                    append(updateNikud(kyt[index!!]))
+                    append(chainText(kyt[index!!]))
                     append("\n\n")
                 }
             }
@@ -429,7 +453,7 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
                         append(mishnayotSource[index!!].toString())
                     }
                     append("\n")
-                    append(updateNikud(mishnayot[index!!]))
+                    append(chainText(mishnayot[index!!]))
                     append("\n\n")
                 }
             }
@@ -455,7 +479,7 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
                         append(alefBet[scnd][0])
                         append("\n")
                     }
-                    append(updateNikud(getString(res)))
+                    append(chainText(getString(res)))
                     append("\n\n")
                 }
             }
@@ -494,4 +518,19 @@ class SettingsManager(private val context: Context) {
                 Log.d("SettingsManager", "Getting isBlackText: $it")
             }
         }
+    val isElohim: Boolean
+        get() {
+            val key = context.getString(R.string.pref_elohim)
+            return prefs.getBoolean(key, true).also {
+                Log.d("SettingsManager", "Getting isElohim: $it")
+            }
+        }
+    val showGodName: Boolean
+        get() {
+            val key = context.getString(R.string.pref_is_god_name)
+            return prefs.getBoolean(key, true).also {
+                Log.d("SettingsManager", "Getting showGodName: $it")
+            }
+        }
+
 }

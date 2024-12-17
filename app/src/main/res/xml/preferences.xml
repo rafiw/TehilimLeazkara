@@ -34,6 +34,16 @@
             android:minHeight="48dp"
             app:defaultValue="true"
             app:iconSpaceReserved="false"
+            app:key="@string/pref_black_text"
+            app:summary="קובע את צבע הטקסט והרקע לבן ושחור"
+            app:summaryOff="טקסט לבן על רקע שחור"
+            app:summaryOn="טקסט שחור על רקע לבן"
+            app:title="צבע טקסט ורקע" />
+
+        <SwitchPreferenceCompat
+            android:minHeight="48dp"
+            app:defaultValue="true"
+            app:iconSpaceReserved="false"
             app:key="@string/pref_is_font_enabled"
             app:summary="האם להציג ניקוד בטקסט"
             app:summaryOff="ניקוד לא מוצג"
@@ -44,10 +54,21 @@
             android:minHeight="48dp"
             app:defaultValue="true"
             app:iconSpaceReserved="false"
-            app:key="@string/pref_black_text"
-            app:summary="קובע את צבע הטקסט והרקע לבן ושחור"
-            app:summaryOff="טקסט לבן על רקע שחור"
-            app:summaryOn="טקסט שחור על רקע לבן"
-            app:title="צבע טקסט ורקע" />
+            app:key="@string/pref_is_god_name"
+            app:summary="האם להציג שם יה-וה"
+            app:summaryOff="לא מוצג"
+            app:summaryOn="מוצג"
+            app:title="להציג שם השם?" />
+
+        <SwitchPreferenceCompat
+            android:minHeight="48dp"
+            app:defaultValue="true"
+            app:iconSpaceReserved="false"
+            app:key="@string/pref_elohim"
+            app:summary="אלוקים במקום אלוהים"
+            app:summaryOff="אלוקים"
+            app:summaryOn="אלוהים"
+            app:title="אלוהי-ם/אלוקים?" />
+
     </PreferenceCategory>
 </PreferenceScreen>

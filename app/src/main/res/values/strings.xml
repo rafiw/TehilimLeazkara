@@ -169,6 +169,8 @@
     <string name="pref_font_size">font_size</string>
     <string name="pref_black_text">black_text</string>
     <string name="pref_is_font_enabled">is_font_enabled</string>
+    <string name="pref_is_god_name">is_god_name</string>
+    <string name="pref_elohim">is_elohim</string>
     <string name="pref_list_key">listpref</string>
     <string name="gender">מין</string>
     <string name="settings_title">הגדרות</string>
