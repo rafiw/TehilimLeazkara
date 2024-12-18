@@ -402,18 +402,23 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
     }
 
     private fun removeGodName(text: String): String {
-        return settingsManager
-            .showGodName
-            .select(text, text.replace("אֲדֹנָי", "אֲדֹנָ-י")
-                              .replace("יְהוָה","יְהוָ-ה"))
+        val replacements = mapOf(
+            "אֲדֹנָי" to "אֲדֹנָ-י",
+            "יְהוָה" to "יְהוָ-ה",
+        )
+        val replacedText = replacements.entries.fold(text) { acc, (old, new) ->
+            acc.replace(old, new)
+        }
+
+        return settingsManager.showGodName.select(text, replacedText)
     }
 
     private fun removeElohim(text: String): String {
         val replacements = mapOf(
-            "אֱלֹהִים" to "אֱלֹקִים",
-            "אֱלֹהֵינוּ" to "אֱלֹקֵינוּ",
-            "אֱלֹהָי" to "אֱלֹקָי",
-            "אֱלֹהָיו" to "אֱלֹקָיו"
+            "אֱלֹהִים" to "אֱ-לֹהִים",
+            "אֱלֹהֵינוּ" to "אֱ-לֹהֵינוּ",
+            "אֱלֹהָי" to "אֱ-לֹהָי",
+            "אֱלֹהָיו" to "אֱ-לֹהָיו"
         )
         val replacedText = replacements.entries.fold(text) { acc, (old, new) ->
             acc.replace(old, new)
