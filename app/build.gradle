@@ -6,11 +6,6 @@ plugins {
 android {
     namespace 'com.solve.it'
     compileSdk 34
-    lintOptions {
-        disable "Instantiatable"
-	checkReleaseBuilds false
-        abortOnError false
-    }
 
     defaultConfig {
         applicationId "com.solve.it"
@@ -37,6 +32,11 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+        disable 'Instantiatable'
     }
     buildFeatures {
         viewBinding true
