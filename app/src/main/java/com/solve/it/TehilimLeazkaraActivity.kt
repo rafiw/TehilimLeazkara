@@ -172,7 +172,13 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
                             append(inputParentName.text)
                         }
                     } else {
-                        append(resources.getString(item[2]))
+                        bold {
+                            append(resources.getString(item[2]))
+                            append(" ")
+                            append(resources.getString(item[1]))
+                            append(" ")
+                            append(resources.getString(item[2]))
+                        }
                     }
                     append(" ")
                     append(chainText(resources.getString(item[3]))) } }
@@ -187,8 +193,14 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
         if (inputName.text.isBlank() || inputParentName.text.isBlank()) {
             Toast.makeText(this, R.string.error_missing_nams, Toast.LENGTH_LONG).show()
         }
-        val wData = Pair(R.string.girl, R.string.tfilat_leiluy_w)
-        val mData = Pair(R.string.son, R.string.tfilat_leiluy_m)
+        val wData = Triple(
+            resources.getString(R.string.girl),
+            resources.getString(R.string.ashkava_w_anon),
+            resources.getString(R.string.tfilat_leiluy_w))
+        val mData = Triple(
+            resources.getString(R.string.son),
+            resources.getString(R.string.ashkava_m_anon),
+            resources.getString(R.string.tfilat_leiluy_m))
 
         toggleGender
             .isChecked
@@ -197,14 +209,18 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
                     append(chainText(resources.getString(R.string.tfila_generic_start)))
                     append(" ")
                     bold {
-                        append(inputName.text.toString())
+                        append(inputName.text.ifEmpty {
+                            it.second
+                        }.toString())
                         append(" ")
-                        append(resources.getString(it.first))
+                        append(it.first)
                         append(" ")
-                        append(inputParentName.text.toString())
+                        append(inputParentName.text.ifEmpty {
+                            it.second
+                        }.toString())
                     }
                     append(" ")
-                    append(chainText(resources.getString(it.second))) } }
+                    append(chainText(it.third)) } }
             .let {
                 sendTextToView(SpannableString(it))
             }
@@ -332,10 +348,12 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
 
         val elMaleText = buildSpannedString {
             append(chainText(getString(R.string.elMaleBeginGeneric)))
-            append(chainText(" ${inputName.text} "))
-            append(if (toggleGender.isChecked) getString(R.string.girl) else getString(R.string.son))
-            append(chainText(" ${inputParentName.text} "))
-            append(if (toggleGender.isChecked) getString(R.string.elMaleWoman) else getString(R.string.elMaleMan))
+            bold {
+                append(chainText(" ${inputName.text} "))
+                append(getString(toggleGender.isChecked.select(R.string.girl, R.string.son)))
+                append(chainText(" ${inputParentName.text} "))
+            }
+            append(getString(toggleGender.isChecked.select(R.string.elMaleWoman, R.string.elMaleMan)));
         }
 
         sendTextToView(SpannableString(elMaleText))
