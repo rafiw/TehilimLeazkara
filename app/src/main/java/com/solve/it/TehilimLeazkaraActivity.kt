@@ -415,10 +415,16 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
 
     private fun removeElohim(text: String): String {
         val replacements = mapOf(
+            "אֶלֹהִים" to "אֶ-לֹהִים",
             "אֱלֹהִים" to "אֱ-לֹהִים",
-            "אֱלֹהֵינוּ" to "אֱ-לֹהֵינוּ",
-            "אֱלֹהָי" to "אֱ-לֹהָי",
+            "אֱֶלֹהִים" to "אֱֶ-לֹהִים",
+            "אֱלֹהֵינוּ" to "אֱֶ-לֹהֵינוּ",
+            "אֱלֹהַי" to "אֱ-לֹהַי",
+            "אֱלֹהֵי" to "אֱ-לֹהֵי",
+            "אלֹהַי" to "א-לֹהַי",
+            "אֱלָהָא" to "אֱ-לָהָא",
             "אֱלֹהָיו" to "אֱ-לֹהָיו"
+
         )
         val replacedText = replacements.entries.fold(text) { acc, (old, new) ->
             acc.replace(old, new)

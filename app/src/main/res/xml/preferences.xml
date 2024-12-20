@@ -66,9 +66,9 @@
             app:iconSpaceReserved="false"
             app:key="@string/pref_elohim"
             app:summary="אלוקים במקום אלוהים"
-            app:summaryOff="אלוקים"
+            app:summaryOff="א-לוהים"
             app:summaryOn="אלוהים"
-            app:title="אלוהי-ם/אלוקים?" />
+            app:title="אלוהים/א-לוהים?" />
 
     </PreferenceCategory>
 </PreferenceScreen>
