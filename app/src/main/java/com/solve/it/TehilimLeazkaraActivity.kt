@@ -7,9 +7,11 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.media.AudioManager
 import android.os.Bundle
+import android.text.Editable
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.SpannedString
+import android.text.TextWatcher
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -17,6 +19,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.text.bold
 import androidx.preference.PreferenceManager
 import com.google.android.material.button.MaterialButton
@@ -258,6 +261,20 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
         }
 
         errorAnimation.start()
+
+        textInputLayout.editText?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (!s.isNullOrEmpty()) {
+                    textInputLayout.error = null
+                    textInputLayout.boxStrokeErrorColor = ColorStateList.valueOf(
+                        ContextCompat.getColor(textInputLayout.context, R.color.primary)
+                    )
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
     }
 
     private fun handleButtonClickMishnayot() {
