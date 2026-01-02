@@ -9,14 +9,13 @@
         android:smallScreens="true"
         android:xlargeScreens="true" />
     <application
-        android:allowBackup="true"
         android:icon="@drawable/icon"
         android:roundIcon="@drawable/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:layoutDirection="rtl"
         android:theme="@style/Theme.YourApp"
-		tools:targetApi="33">
+		tools:targetApi="36">
         <activity
             android:name=".TehilimLeazkaraActivity"
             android:exported="true">
