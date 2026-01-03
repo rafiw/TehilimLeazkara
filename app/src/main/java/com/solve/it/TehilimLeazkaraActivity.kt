@@ -30,7 +30,7 @@ import com.google.android.material.textfield.TextInputLayout
 
 
 class TehilimLeazkaraActivity : AppCompatActivity() {
-    private var isSon: Boolean = true
+    private var isMan: Boolean = true
 
     // UI Components
     private lateinit var buttonThilim: MaterialButton
@@ -85,7 +85,7 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
     }
     private fun initializeViews() {
         // Initialize all view references
-        this.isSon = true
+        this.isMan = true
         buttonAshkava = findViewById(R.id.buttonAshkava)
         buttonElMale = findViewById(R.id.buttonElMale)
         buttonEntrance = findViewById(R.id.buttonEntrance)
@@ -116,8 +116,8 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
             handleButtonClick_ElMale()
         }
         toggleGender.setOnClickListener {
-            isSon = !isSon
-            toggleGender.text = if (isSon) getString(R.string.son) else getString(R.string.girl)
+            isMan = !isMan
+            toggleGender.text = if (isMan) getString(R.string.son) else getString(R.string.girl)
         }
         buttonEntrance.setOnClickListener {
             handleEntranceButtonClick()
