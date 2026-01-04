@@ -489,20 +489,57 @@ class TehilimLeazkaraActivity : AppCompatActivity() {
         val mishnayotSource = resources.getStringArray(R.array.mishnayot_source)
         val mishnayot = resources.getStringArray(R.array.mishnayot)
 
-        return name.map { it to alefBet[it] }
+        fun buildAfterLimud(): SpannedString {
+            // name cannot be blank
+            val lastName = inputParentName.text.toString().ifBlank {
+                toggleGender.isChecked.select(
+                    resources.getString(R.string.ashkava_w_anon),
+                    resources.getString(R.string.ashkava_m_anon)
+                )
+            }.trim()
+
+            fun buildDesName() = buildSpannedString {
+                bold { append("$name ${toggleGender.text} $lastName ") }
+            }
+
+            val (prey2, opt2Suffix) = toggleGender.isChecked.select(
+                resources.getString(R.string.after_limud_prey2_woman) to resources.getString(R.string.after_limud_opt2_woman),
+                resources.getString(R.string.after_limud_prey2_man) to resources.getString(R.string.after_limud_opt2_man)
+            )
+
+            return buildSpannedString {
+                bold { append(resources.getString(R.string.after_limud_intro)) }
+                append("\n")
+                append(resources.getString(R.string.after_limud_prey1))
+                append(" ")
+                append(buildDesName())
+                append(prey2)
+                append("\n\n")
+                bold { append(resources.getString(R.string.second_opt)) }
+                append("\n")
+                append(resources.getString(R.string.after_limud_opt2_prey1))
+                append(buildDesName())
+                append(opt2Suffix)
+            }
+        }
+
+        val mishnayotToLearn: List<SpannedString> = name.map { it to alefBet[it] }
             .filter { it.second != null }
-            .map { (letter, index) ->
+            .map { (letter, idx) ->
+                val index = idx!!
                 buildSpannedString {
                     bold {
                         append(letter.toString())
                         append("\n")
-                        append(mishnayotSource[index!!].toString())
+                        append(mishnayotSource[index])
                     }
                     append("\n")
-                    append(chainText(mishnayot[index!!]))
+                    append(chainText(mishnayot[index]))
                     append("\n\n")
                 }
             }
+
+        return mishnayotToLearn + buildAfterLimud()
     }
 
     private fun setTehilimArray(): List<SpannedString>  {
