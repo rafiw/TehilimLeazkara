@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Spannable
+import android.text.SpannableStringBuilder
 import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
@@ -130,7 +131,11 @@ class ViewTehilim : AppCompatActivity() {
             }
 
             // Set text content
-            textView.text = bundle.getCharSequence(Constants.TEXT_KEY) as Spannable
+            // add 2 blank lines at the end due to buttons
+            val text = SpannableStringBuilder(bundle.getCharSequence(Constants.TEXT_KEY)).apply {
+                append("\n\n")
+            }
+            textView.text = text
         }
 
         // Load saved text size
