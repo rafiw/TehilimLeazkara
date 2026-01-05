@@ -11,8 +11,8 @@ android {
         applicationId "com.solve.it"
         minSdk 26
         targetSdk 36
-        versionCode 35
-        versionName "3.95"
+        versionCode 37
+        versionName "3.96"
     }
 
     buildTypes {
